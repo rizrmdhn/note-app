@@ -8,7 +8,7 @@
     "start:dev": "nodemon tsx server.ts",
     "migrate": "node-pg-migrate",
     "migrate:test": "node-pg-migrate -f config/database/test.json",
-    "migrate-rollback": "node-pg-migrate down",
+    "migrate:rollback": "node-pg-migrate down",
     "lint": "eslint . --ext .ts"
   },
   "author": "rizrmdhn",
