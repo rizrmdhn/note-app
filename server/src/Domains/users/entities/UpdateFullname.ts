@@ -4,14 +4,14 @@ export default class UpdateFullname implements IUpdateFullname {
   id: string;
   fullname: string;
 
-  constructor(payload: UpdateFullname) {
+  constructor(payload: IUpdateFullname) {
     this._validatePayload(payload);
     const { id, fullname } = payload;
     this.id = id;
     this.fullname = fullname;
   }
 
-  _validatePayload({ id, fullname }: UpdateFullname) {
+  _validatePayload({ id, fullname }: IUpdateFullname) {
     if (!id || !fullname) {
       throw new Error("UPDATE_FULLNAME.NOT_CONTAIN_NEEDED_PROPERTY");
     }

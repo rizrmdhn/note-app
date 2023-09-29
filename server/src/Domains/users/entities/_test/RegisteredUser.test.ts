@@ -1,6 +1,6 @@
-import GetUser from "../GetUser";
+import RegisteredUser from "../RegisteredUser";
 
-describe("a GetUser entities", () => {
+describe("a RegisteredUser entities", () => {
   it("should throw error when payload did not contain needed property", () => {
     // Arrange
     const payload = {
@@ -8,12 +8,11 @@ describe("a GetUser entities", () => {
       username: "dicoding",
       email: "",
       fullname: "",
-      _validatePayload: () => {},
     };
 
     // Action & Assert
-    expect(() => new GetUser(payload)).toThrowError(
-      "GET_USER.NOT_CONTAIN_NEEDED_PROPERTY"
+    expect(() => new RegisteredUser(payload)).toThrowError(
+      "REGISTERED_USER.NOT_CONTAIN_NEEDED_PROPERTY"
     );
   });
 
@@ -24,31 +23,28 @@ describe("a GetUser entities", () => {
       username: "dicoding",
       email: "test",
       fullname: "test",
-      _validatePayload: () => {},
     };
 
     // Action & Assert
-    // @ts-expect-error Invalid payload for testing purposes.
-    expect(() => new GetUser(payload)).toThrowError(
-      "GET_USER.NOT_MEET_DATA_TYPE_SPECIFICATION"
+    // @ts-expect-error testing purpose
+    expect(() => new RegisteredUser(payload)).toThrowError(
+      "REGISTERED_USER.NOT_MEET_DATA_TYPE_SPECIFICATION"
     );
   });
 
-  it("should create GetUser object correctly", () => {
+  it("should create registeredUser object correctly", () => {
     // Arrange
     const payload = {
       id: "user-123",
       username: "dicoding",
       email: "dicoding@mail.com",
       fullname: "Dicoding Indonesia",
-      _validatePayload: () => {},
     };
 
     // Action
-    const { id, username, email, fullname } = new GetUser(payload);
+    const { id, username, email, fullname } = new RegisteredUser(payload);
 
     // Assert
-
     expect(id).toEqual(payload.id);
     expect(username).toEqual(payload.username);
     expect(email).toEqual(payload.email);

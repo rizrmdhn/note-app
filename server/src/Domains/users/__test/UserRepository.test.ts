@@ -38,6 +38,7 @@ describe("UserRepository interface", () => {
       userRepository.updatePassword({
         id: "",
         password: "",
+        confirmPassword: "",
       })
     ).rejects.toThrowError("USER_REPOSITORY.METHOD_NOT_IMPLEMENTED");
 

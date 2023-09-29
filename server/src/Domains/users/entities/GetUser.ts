@@ -6,7 +6,7 @@ export default class GetUser implements IGetUser {
   email: string;
   fullname: string;
 
-  constructor(payload: GetUser) {
+  constructor(payload: IGetUser) {
     this._validatePayload(payload);
     const { id, username, email, fullname } = payload;
     this.id = id;
@@ -15,7 +15,7 @@ export default class GetUser implements IGetUser {
     this.fullname = fullname;
   }
 
-  _validatePayload({ id, username, email, fullname }: GetUser) {
+  _validatePayload({ id, username, email, fullname }: IGetUser) {
     if (!id || !username || !email || !fullname) {
       throw new Error("GET_USER.NOT_CONTAIN_NEEDED_PROPERTY");
     }

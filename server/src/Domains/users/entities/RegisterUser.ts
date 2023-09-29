@@ -6,7 +6,7 @@ export default class RegisterUser implements IRegisterUser {
   email: string;
   fullname: string;
 
-  constructor(payload: RegisterUser) {
+  constructor(payload: IRegisterUser) {
     this._validatePayload(payload);
     const { username, password, email, fullname } = payload;
     this.username = username;
@@ -15,7 +15,7 @@ export default class RegisterUser implements IRegisterUser {
     this.fullname = fullname;
   }
 
-  _validatePayload({ username, password, email, fullname }: RegisterUser) {
+  _validatePayload({ username, password, email, fullname }: IRegisterUser) {
     if (!username || !password || !email || !fullname) {
       throw new Error("REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY");
     }

@@ -29,10 +29,12 @@ export interface IUpdateFullname {
 export interface IUpdatePassword {
   id: string;
   password: string;
+  confirmPassword: string;
 }
 
 export interface IUserLogin {
-  username: string;
+  username?: string;
+  email?: string;
   password: string;
 }
 
