@@ -1,17 +1,15 @@
+/* eslint-disable camelcase */
 exports.up = (pgm) => {
-  pgm.createTable("folders", {
+  pgm.createTable("categories", {
     id: {
       type: "VARCHAR(50)",
-      primaryKey: true,
       unique: true,
+      primaryKey: true,
     },
     name: {
-      type: "text",
+      type: "VARCHAR(50)",
       unique: true,
       notNull: true,
-    },
-    categoriesId: {
-      type: "VARCHAR(50)",
     },
     ownerId: {
       type: "VARCHAR(50)",
@@ -53,12 +51,18 @@ exports.up = (pgm) => {
   });
 
   pgm.addConstraint(
-    "folders",
-    "fk_folders.ownerId_users.id",
+    "categories",
+    "fk_categories.ownerId_users.id",
     `FOREIGN KEY("ownerId") REFERENCES users(id) ON DELETE CASCADE`
+  );
+
+  pgm.addConstraint(
+    "folders",
+    "fk_folders.categoriesId_categories.id",
+    `FOREIGN KEY("categoriesId") REFERENCES categories(id) ON DELETE CASCADE`
   );
 };
 
 exports.down = (pgm) => {
-  pgm.dropTable("folders");
+  pgm.dropTable("categories");
 };
