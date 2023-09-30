@@ -1,9 +1,9 @@
 import joi from "joi";
 
 export interface IInputValidator {
-  validateUsername(username: string): boolean;
-  validateEmail(email: string): boolean;
-  validatePassword(password: string): boolean;
+  validateUsername(username: string): Promise<boolean>;
+  validateEmail(email: string): Promise<boolean>;
+  validatePassword(password: string): Promise<boolean>;
 }
 
 export type IJoi = typeof joi;

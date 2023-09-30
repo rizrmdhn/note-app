@@ -7,7 +7,6 @@ describe("a UpdatePassword entities", () => {
       id: "",
       password: "",
       confirmPassword: "",
-      _validatePayload: () => {},
     };
 
     // Action & Assert
@@ -22,7 +21,6 @@ describe("a UpdatePassword entities", () => {
       id: 123,
       password: 123,
       confirmPassword: 123,
-      _validatePayload: () => {},
     };
 
     // Action & Assert
@@ -38,7 +36,6 @@ describe("a UpdatePassword entities", () => {
       id: "user-123",
       password: "super_password",
       confirmPassword: "super_password2",
-      _validatePayload: () => {},
     };
 
     // Action & Assert
@@ -53,7 +50,6 @@ describe("a UpdatePassword entities", () => {
       id: "user-123",
       password: "super_password",
       confirmPassword: "super_password",
-      _validatePayload: () => {},
     };
 
     // Action

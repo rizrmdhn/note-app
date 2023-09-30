@@ -86,7 +86,6 @@ describe("RegisterUser entities", () => {
       email: "dicoding@mail.com",
       fullname: "Dicoding Indonesia",
       password: "super_password",
-      _validatePayload: () => {},
     };
 
     // Action

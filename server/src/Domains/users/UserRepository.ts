@@ -1,6 +1,7 @@
 import {
   IGetUser,
   IRegisterUser,
+  IRegisteredUser,
   IUpdateFullname,
   IUpdatePassword,
   IUserLogin,
@@ -8,7 +9,7 @@ import {
 } from "@/types/users";
 
 export default class UserRepository implements IUserRepository {
-  async addUser(payload: IRegisterUser): Promise<string> {
+  async addUser(payload: IRegisterUser): Promise<IRegisteredUser> {
     throw new Error("USER_REPOSITORY.METHOD_NOT_IMPLEMENTED");
   }
 

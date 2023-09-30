@@ -1,15 +1,15 @@
 import { IInputValidator } from "@/types/validator";
 
 export default class InputValidator implements IInputValidator {
-  validateUsername(username: string): boolean {
+  async validateUsername(username: string): Promise<boolean> {
     throw new Error("INPUT_VALIDATOR.METHOD_NOT_IMPLEMENTED");
   }
 
-  validateEmail(email: string): boolean {
+  async validateEmail(email: string): Promise<boolean> {
     throw new Error("INPUT_VALIDATOR.METHOD_NOT_IMPLEMENTED");
   }
 
-  validatePassword(password: string): boolean {
+  async validatePassword(password: string): Promise<boolean> {
     throw new Error("INPUT_VALIDATOR.METHOD_NOT_IMPLEMENTED");
   }
 }

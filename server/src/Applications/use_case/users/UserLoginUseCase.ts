@@ -1,18 +1,22 @@
+// Types import
 import {
+  IUserLogin,
   IUserLoginUseCase,
+  IUserRepository,
   TUserLoginUseCase,
-  TUserRepository,
 } from "@/types/users";
 import {
   IAuthenticationRepository,
   IAuthenticationTokenManager,
 } from "@/types/auth";
 import { IPasswordHash } from "@/types/hash";
+
+// Entity import
 import UserLogin from "@/Domains/users/entities/UserLogin";
 import NewAuth from "@/Domains/authentications/entities/NewAuth";
 
 export default class UserLoginUseCase implements IUserLoginUseCase {
-  _userRepository: TUserRepository;
+  _userRepository: IUserRepository;
   _authenticationRepository: IAuthenticationRepository;
   _authenticationTokenManager: IAuthenticationTokenManager;
   _passwordHash: IPasswordHash;
@@ -29,7 +33,7 @@ export default class UserLoginUseCase implements IUserLoginUseCase {
     this._passwordHash = passwordHash;
   }
 
-  async execute(useCasePayload: UserLogin): Promise<object> {
+  async execute(useCasePayload: IUserLogin): Promise<object> {
     const { username, email, password } = new UserLogin(useCasePayload);
 
     if (!username) {

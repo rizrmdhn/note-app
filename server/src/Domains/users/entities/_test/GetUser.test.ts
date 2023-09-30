@@ -8,7 +8,6 @@ describe("a GetUser entities", () => {
       username: "dicoding",
       email: "",
       fullname: "",
-      _validatePayload: () => {},
     };
 
     // Action & Assert
@@ -24,7 +23,6 @@ describe("a GetUser entities", () => {
       username: "dicoding",
       email: "test",
       fullname: "test",
-      _validatePayload: () => {},
     };
 
     // Action & Assert
@@ -41,7 +39,6 @@ describe("a GetUser entities", () => {
       username: "dicoding",
       email: "dicoding@mail.com",
       fullname: "Dicoding Indonesia",
-      _validatePayload: () => {},
     };
 
     // Action

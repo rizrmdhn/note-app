@@ -6,7 +6,6 @@ describe("a UpdateFullname entities", () => {
     const payload = {
       id: "",
       fullname: "",
-      _validatePayload: () => {},
     };
 
     // Action & Assert
@@ -20,7 +19,6 @@ describe("a UpdateFullname entities", () => {
     const payload = {
       id: 123,
       fullname: 123,
-      _validatePayload: () => {},
     };
 
     // Action & Assert
@@ -35,7 +33,6 @@ describe("a UpdateFullname entities", () => {
     const payload = {
       id: "user-123",
       fullname: "Dicoding Indonesia",
-      _validatePayload: () => {},
     };
 
     // Action

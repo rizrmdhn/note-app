@@ -2,6 +2,7 @@
 
 import { IAuthenticationRepository, IAuthenticationTokenManager } from "./auth";
 import { IPasswordHash } from "./hash";
+import { IInputValidator } from "./validator";
 
 export interface IGetUser {
   id: string;
@@ -44,7 +45,7 @@ export interface IUserLogin {
 // Domains Repositories Types for Users
 
 export interface IUserRepository {
-  addUser(payload: IRegisterUser): Promise<string>;
+  addUser(payload: IRegisterUser): Promise<IRegisteredUser>;
   getUserByUsername(username: string): Promise<IGetUser>;
   getUserById(id: string): Promise<IGetUser>;
   getOwnProfile(id: string): Promise<IGetUser>;
@@ -63,14 +64,22 @@ export interface IUserRepository {
 
 // Applications Types for Users
 
-export type TUserRepository = IUserRepository;
-
 export type TUserLoginUseCase = {
-  userRepository: TUserRepository;
+  userRepository: IUserRepository;
   authenticationRepository: IAuthenticationRepository;
   authenticationTokenManager: IAuthenticationTokenManager;
   passwordHash: IPasswordHash;
 };
 export interface IUserLoginUseCase {
   execute(payload: IUserLogin): Promise<object>;
+}
+
+export type TUserRegisterUseCase = {
+  userRepository: IUserRepository;
+  passwordHash: IPasswordHash;
+  inputValidator: IInputValidator;
+};
+
+export interface IUserRegisterUseCase {
+  execute(payload: IRegisterUser): Promise<IRegisteredUser>;
 }
