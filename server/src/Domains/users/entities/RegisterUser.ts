@@ -28,5 +28,18 @@ export default class RegisterUser implements IRegisterUser {
     ) {
       throw new Error("REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION");
     }
+
+    if ((username && username.length > 50) || (email && email.length > 50)) {
+      throw new Error("REGISTER_USER.USERNAME_EMAIL_LIMIT_CHAR");
+    }
+
+    const usernameRegex = new RegExp(/^[a-zA-Z0-9]+$/);
+    if (username && !usernameRegex.test(username)) {
+      throw new Error("REGISTER_USER.USERNAME_CONTAIN_RESTRICTED_CHARACTER");
+    }
+
+    if (password.length < 8) {
+      throw new Error("REGISTER_USER.PASSWORD_LIMIT_CHAR");
+    }
   }
 }

@@ -54,59 +54,6 @@ describe("a UserLogin entities", () => {
     );
   });
 
-  it("should throw error when username length more than 50 character", () => {
-    // Arrange
-    const payload = {
-      username:
-        "dicodasdaasdadadasdasdadadadasdasdasdasdawdawdasdadaaadadasdasd",
-      password: "super_password",
-    };
-
-    // Action & Assert
-    expect(() => new UserLogin(payload)).toThrowError(
-      "USER_LOGIN.USERNAME_LIMIT_CHAR"
-    );
-  });
-
-  it("should throw error when email length more than 50 character", () => {
-    // Arrange
-    const payload = {
-      email: "dicodasdaasdadadasdasdadadadasdasdasdasdawdawdasdada@mail.com",
-      password: "super_password",
-    };
-
-    // Action & Assert
-    expect(() => new UserLogin(payload)).toThrowError(
-      "USER_LOGIN.EMAIL_LIMIT_CHAR"
-    );
-  });
-
-  it("should throw error when username contain restricted character", () => {
-    // Arrange
-    const payload = {
-      username: "dicoding*",
-      password: "super_password",
-    };
-
-    // Action & Assert
-    expect(() => new UserLogin(payload)).toThrowError(
-      "USER_LOGIN.USERNAME_CONTAIN_RESTRICTED_CHARACTER"
-    );
-  });
-
-  it("should throw error when password length less than 8 character", () => {
-    // Arrange
-    const payload = {
-      username: "dicoding",
-      password: "super",
-    };
-
-    // Action & Assert
-    expect(() => new UserLogin(payload)).toThrowError(
-      "USER_LOGIN.PASSWORD_LIMIT_CHAR"
-    );
-  });
-
   it("should at least contain username or email and password", () => {
     // Arrange
     const payload = {

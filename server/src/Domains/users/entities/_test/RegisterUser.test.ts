@@ -8,7 +8,6 @@ describe("RegisterUser entities", () => {
       email: "",
       fullname: "",
       password: "",
-      _validatePayload: () => {},
     };
 
     // Action & Assert
@@ -24,13 +23,59 @@ describe("RegisterUser entities", () => {
       email: "dicoding@mail.com",
       fullname: "Dicoding Indonesia",
       password: "super_password",
-      _validatePayload: () => {},
     };
 
     // Action & Assert
     // @ts-expect-error testing purpose
     expect(() => new RegisterUser(payload)).toThrowError(
       "REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION"
+    );
+  });
+
+  it("should throw error when username length more than 50 character", () => {
+    // Arrange
+    const payload = {
+      username:
+        "dicodingindonesiadicodingindonesiadicodingindonesiadicodingindonesia",
+      email:
+        "dicodingindonesiadicodingindonesiadicodingindonesiadicodingindonesia@mail.com",
+      fullname: "Dicoding Indonesia",
+      password: "super_password",
+    };
+
+    // Action & Assert
+    expect(() => new RegisterUser(payload)).toThrowError(
+      "REGISTER_USER.USERNAME_EMAIL_LIMIT_CHAR"
+    );
+  });
+
+  it("should throw error when username contain restricted character", () => {
+    // Arrange
+    const payload = {
+      username: "dicoding indonesia",
+      email: "dicoding@mail.com",
+      fullname: "Dicoding Indonesia",
+      password: "super_password",
+    };
+
+    // Action & Assert
+    expect(() => new RegisterUser(payload)).toThrowError(
+      "REGISTER_USER.USERNAME_CONTAIN_RESTRICTED_CHARACTER"
+    );
+  });
+
+  it("should throw error when password length less than 8 character", () => {
+    // Arrange
+    const payload = {
+      username: "dicoding",
+      email: "dicoding@mail.com",
+      fullname: "Dicoding Indonesia",
+      password: "super",
+    };
+
+    // Action & Assert
+    expect(() => new RegisterUser(payload)).toThrowError(
+      "REGISTER_USER.PASSWORD_LIMIT_CHAR"
     );
   });
 
