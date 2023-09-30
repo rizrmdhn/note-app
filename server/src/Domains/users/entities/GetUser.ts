@@ -1,6 +1,6 @@
 import { IGetUser } from "@/types/users";
 
-export default class GetUser implements IGetUser {
+export default class GetUser {
   id: string;
   username: string;
   email: string;

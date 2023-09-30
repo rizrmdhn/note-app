@@ -27,6 +27,26 @@ describe("UserRepository interface", () => {
       "USER_REPOSITORY.METHOD_NOT_IMPLEMENTED"
     );
 
+    await expect(userRepository.getPasswordByUsername("")).rejects.toThrowError(
+      "USER_REPOSITORY.METHOD_NOT_IMPLEMENTED"
+    );
+
+    await expect(userRepository.getPasswordByEmail("")).rejects.toThrowError(
+      "USER_REPOSITORY.METHOD_NOT_IMPLEMENTED"
+    );
+
+    await expect(userRepository.getPasswordById("")).rejects.toThrowError(
+      "USER_REPOSITORY.METHOD_NOT_IMPLEMENTED"
+    );
+
+    await expect(userRepository.getIdByUsername("")).rejects.toThrowError(
+      "USER_REPOSITORY.METHOD_NOT_IMPLEMENTED"
+    );
+
+    await expect(userRepository.getIdByEmail("")).rejects.toThrowError(
+      "USER_REPOSITORY.METHOD_NOT_IMPLEMENTED"
+    );
+
     await expect(
       userRepository.updateFullname({
         id: "",

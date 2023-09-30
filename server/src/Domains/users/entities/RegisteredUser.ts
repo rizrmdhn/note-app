@@ -1,6 +1,6 @@
 import { IRegisteredUser } from "@/types/users";
 
-export default class RegisteredUser implements IRegisteredUser {
+export default class RegisteredUser {
   id: string;
   username: string;
   email: string;

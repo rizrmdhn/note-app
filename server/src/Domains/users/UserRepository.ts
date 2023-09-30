@@ -24,6 +24,26 @@ export default class UserRepository implements IUserRepository {
     throw new Error("USER_REPOSITORY.METHOD_NOT_IMPLEMENTED");
   }
 
+  async getPasswordByUsername(username: string): Promise<string> {
+    throw new Error("USER_REPOSITORY.METHOD_NOT_IMPLEMENTED");
+  }
+
+  async getPasswordByEmail(email: string): Promise<string> {
+    throw new Error("USER_REPOSITORY.METHOD_NOT_IMPLEMENTED");
+  }
+
+  async getPasswordById(id: string): Promise<string> {
+    throw new Error("USER_REPOSITORY.METHOD_NOT_IMPLEMENTED");
+  }
+
+  async getIdByUsername(username: string): Promise<string> {
+    throw new Error("USER_REPOSITORY.METHOD_NOT_IMPLEMENTED");
+  }
+
+  async getIdByEmail(email: string): Promise<string> {
+    throw new Error("USER_REPOSITORY.METHOD_NOT_IMPLEMENTED");
+  }
+
   async updateFullname(payload: IUpdateFullname): Promise<void> {
     throw new Error("USER_REPOSITORY.METHOD_NOT_IMPLEMENTED");
   }

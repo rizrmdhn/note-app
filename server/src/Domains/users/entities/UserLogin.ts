@@ -1,6 +1,6 @@
 import { IUserLogin } from "@/types/users";
 
-export default class UserLogin implements IUserLogin {
+export default class UserLogin {
   username?: string | undefined;
   email?: string | undefined;
   password: string;

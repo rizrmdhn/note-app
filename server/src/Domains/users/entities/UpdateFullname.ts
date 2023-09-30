@@ -1,6 +1,6 @@
 import { IUpdateFullname } from "@/types/users";
 
-export default class UpdateFullname implements IUpdateFullname {
+export default class UpdateFullname {
   id: string;
   fullname: string;
 

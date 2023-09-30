@@ -1,6 +1,6 @@
 import { IUpdatePassword } from "@/types/users";
 
-export default class UpdatePassword implements IUpdatePassword {
+export default class UpdatePassword {
   id: string;
   password: string;
   confirmPassword: string;
