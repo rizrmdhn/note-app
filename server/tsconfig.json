@@ -32,7 +32,7 @@
     "paths": {
       "@/types/*": ["./src/types/*"],
       "@/*": ["./src/*"],
-      "@/Applications/*": ["./src/Application/*"],
+      "@/Applications/*": ["./src/Applications/*"],
       "@/Commons/*": ["./src/Commons/*"],
       "@/Domain/*": ["./src/Domain/*"],
       "@/Infrastructure/*": ["./src/Infrastructure/*"],
