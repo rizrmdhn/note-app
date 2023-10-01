@@ -11,8 +11,9 @@
       "@/Commons/*": ["./src/Commons/*"],
       "@/Domains/*": ["./src/Domains/*"],
       "@/Domain/*": ["./src/Domains/*"],
-      "@/Infrastructure/*": ["./src/Infrastructure/*"],
-      "@/Interfaces/*": ["./src/Interfaces/*"]
+      "@/Infrastructures/*": ["./src/Infrastructures/*"],
+      "@/Interfaces/*": ["./src/Interfaces/*"],
+      "@/Helpers/*": ["./test/*"]
     },
     "resolveJsonModule": true,
     "esModuleInterop": true,
@@ -21,6 +22,6 @@
     "skipLibCheck": true,
     "types": ["@types/jest"]
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "./test/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
