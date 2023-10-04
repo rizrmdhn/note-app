@@ -4,8 +4,8 @@
   "description": "a backend for note-app",
   "main": "server.js",
   "scripts": {
-    "start": "tsx server.ts",
-    "start:dev": "tsx nodemon server.ts",
+    "start": "tsx src/app.ts",
+    "start:dev": "tsx watch src/app.ts",
     "test": "jest --setupFiles dotenv/config -i",
     "test:watch": "jest --watchAll --coverage --setupFiles dotenv/config -i",
     "test:watch:change": "jest --watch --setupFiles dotenv/config -i",
