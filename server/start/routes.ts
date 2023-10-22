@@ -20,6 +20,15 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+Route.get('/', async ({ response }) => {
+  return response.status(200).json({
+    meta: {
+      status: 200,
+      message: 'Welcome to the API',
+    },
+  })
+})
+
 Route.post('/login', `AuthController.login`)
 Route.post('/logout', `AuthController.logout`)
 Route.post('/register', `UsersController.store`)
