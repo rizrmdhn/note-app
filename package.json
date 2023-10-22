@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rizrmdhn/notes-api-adonisjs.git"
+    "url": "git+https://github.com/rizrmdhn/note-app.git"
   },
   "author": "rizrmdhn",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rizrmdhn/notes-api-adonisjs/issues"
+    "url": "https://github.com/rizrmdhn/note-app/issues"
   },
-  "homepage": "https://github.com/rizrmdhn/notes-api-adonisjs#readme"
+  "homepage": "https://github.com/rizrmdhn/note-app#readme"
 }
