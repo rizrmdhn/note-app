@@ -1,4 +1,7 @@
+import useDocumentTitle from "@/hooks/useDocumentTitle";
+
 function App() {
+  useDocumentTitle("App");
   return (
     <>
       <div>
