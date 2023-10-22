@@ -1,47 +1,74 @@
 {
-  "name": "note-app-api",
+  "name": "notes-api",
   "version": "1.0.0",
-  "description": "a backend for note-app",
-  "main": "server.js",
+  "private": true,
   "scripts": {
-    "start": "tsx src/app.ts",
-    "start:dev": "tsx watch src/app.ts",
-    "test": "jest --setupFiles dotenv/config -i",
-    "test:watch": "jest --watchAll --coverage --setupFiles dotenv/config -i",
-    "test:watch:change": "jest --watch --setupFiles dotenv/config -i",
-    "test:coverage": "jest --setupFiles dotenv/config -i --coverage",
-    "migrate": "node-pg-migrate",
-    "migrate:test": "node-pg-migrate -f config/database/test.json",
-    "migrate:rollback": "node-pg-migrate down",
-    "lint": "eslint . --ext .ts",
-    "ts-jest": "ts-jest"
+    "dev": "node ace serve --watch",
+    "build": "node ace build --production",
+    "start": "node server.js",
+    "test": "node ace test",
+    "lint": "eslint . --ext=.ts",
+    "format": "prettier --write ."
   },
-  "author": "rizrmdhn",
-  "license": "ISC",
-  "dependencies": {
-    "@hapi/hapi": "^21.3.2",
-    "@hapi/inert": "^7.1.0",
-    "@hapi/jwt": "^3.2.0",
-    "bcrypt": "^5.1.1",
-    "dotenv": "^16.3.1",
-    "instances-container": "^2.0.6",
-    "joi": "^17.10.2",
-    "nanoid": "^5.0.1",
-    "pg": "^8.11.3"
+  "eslintConfig": {
+    "extends": [
+      "plugin:adonis/typescriptApp",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        }
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "build"
+  ],
+  "prettier": {
+    "trailingComma": "es5",
+    "semi": false,
+    "singleQuote": true,
+    "useTabs": false,
+    "quoteProps": "consistent",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "printWidth": 100
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.0",
-    "@types/jest": "^29.5.5",
-    "@types/pg": "^8.10.3",
-    "@typescript-eslint/eslint-plugin": "^6.7.3",
-    "@typescript-eslint/parser": "^6.7.3",
-    "eslint": "^8.50.0",
-    "jest": "^29.7.0",
-    "node-pg-migrate": "^6.2.2",
-    "nodemon": "^3.0.1",
-    "ts-jest": "^29.1.1",
-    "ts-node": "^10.9.1",
-    "tsx": "^3.13.0",
-    "typescript": "^5.2.2"
+    "@adonisjs/assembler": "^5.9.6",
+    "@japa/preset-adonis": "^1.2.0",
+    "@japa/runner": "^2.5.1",
+    "@types/proxy-addr": "^2.0.2",
+    "@types/source-map-support": "^0.5.9",
+    "adonis-preset-ts": "^2.1.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-adonis": "^2.1.1",
+    "eslint-plugin-prettier": "^5.0.1",
+    "pino-pretty": "^10.2.3",
+    "prettier": "^3.0.3",
+    "typescript": "~4.6",
+    "youch": "^3.3.2",
+    "youch-terminal": "^2.2.3"
+  },
+  "dependencies": {
+    "@adonisjs/auth": "^8.2.3",
+    "@adonisjs/bouncer": "^2.3.0",
+    "@adonisjs/core": "^5.9.0",
+    "@adonisjs/lucid": "^18.4.2",
+    "@adonisjs/repl": "^3.1.11",
+    "luxon": "^3.4.3",
+    "pg": "^8.11.3",
+    "phc-argon2": "^1.1.4",
+    "phc-bcrypt": "^1.0.8",
+    "proxy-addr": "^2.0.7",
+    "reflect-metadata": "^0.1.13",
+    "source-map-support": "^0.5.21"
   }
 }
