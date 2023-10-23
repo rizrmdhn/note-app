@@ -75,6 +75,7 @@ module.exports = {
       },
       height: {
         "header-height": "100px",
+        "half-header-height": "50px",
         "screen-with-header": "calc(100vh - 100px)",
       },
     },

@@ -1,5 +1,5 @@
 import useDocumentTitle from "@/hooks/useDocumentTitle";
-import Header from "@/components/header";
+import Header from "@/components/Header";
 import LeftMenu from "@/components/LeftMenu";
 
 function App() {
