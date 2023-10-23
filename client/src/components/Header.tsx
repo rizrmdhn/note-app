@@ -7,11 +7,17 @@ export default function Header() {
       <div className="flex h-half-header-height items-center justify-between pe-5 ps-5">
         <div className="text-2xl font-bold text-white">Note App</div>
         <div className="flex items-center">
-          <Button variant="outline" className="mr-2 ">
+          <Button
+            variant="outline"
+            className="mr-2 bg-transparent text-primary-foreground hover:bg-popover  hover:text-primary"
+          >
             Login
           </Button>
 
-          <Button variant="outline" className="mr-2">
+          <Button
+            variant="outline"
+            className="mr-2 bg-transparent text-primary-foreground hover:bg-popover  hover:text-primary"
+          >
             Register
           </Button>
         </div>

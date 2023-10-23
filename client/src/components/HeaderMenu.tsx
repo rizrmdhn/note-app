@@ -10,7 +10,7 @@ export default function HeaderMenu() {
   return (
     <Menubar className="border-none bg-transparent text-primary-foreground">
       <MenubarMenu>
-        <MenubarTrigger className="cursor-pointer hover:border-b-2 hover:border-red-500">
+        <MenubarTrigger className="cursor-pointer hover:border-b-2 hover:border-primary-foreground">
           File
         </MenubarTrigger>
         <MenubarContent className="bg-primary-foreground">
@@ -20,7 +20,7 @@ export default function HeaderMenu() {
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger className="cursor-pointer hover:border-b-2 hover:border-red-500">
+        <MenubarTrigger className="cursor-pointer hover:border-b-2 hover:border-primary-foreground">
           Friends
         </MenubarTrigger>
         <MenubarContent className="bg-primary-foreground">
