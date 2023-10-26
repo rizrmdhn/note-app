@@ -36,6 +36,9 @@ Route.post('/register', `UsersController.store`)
 Route.group(() => {
   Route.get('/users', `UsersController.index`)
   Route.get('/users/me', `UsersController.show`)
+  Route.put('/users/me', `UsersController.update`)
+
+  Route.post('/avatars', `AvatarsController.store`).middleware(['avatarChecker'])
 
   Route.get('/notes/all', `NotesController.index`)
   Route.post('/notes', `NotesController.store`)

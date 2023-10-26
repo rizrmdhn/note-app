@@ -2,7 +2,6 @@
   "name": "note-app",
   "version": "1.0.0",
   "description": "a simple note app",
-  "main": "index.js",
   "scripts": {
     "client:init": "cd client && npm install",
     "client:dev": "cd client && npm run dev",

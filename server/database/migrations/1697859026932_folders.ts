@@ -25,6 +25,12 @@ export default class extends BaseSchema {
       table.timestamp('created_at', { useTz: true }).defaultTo(this.now())
       table.timestamp('updated_at', { useTz: true })
       table.timestamp('deleted_at', { useTz: true }).nullable()
+
+      // index
+      table.index(['id'], 'folders_id_idx')
+      table.index(['name'], 'folders_name_idx')
+      table.index(['category_id'], 'folders_category_id_idx')
+      table.index(['owner_id'], 'folders_owner_id_idx')
     })
   }
 

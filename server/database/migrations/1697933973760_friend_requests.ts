@@ -12,6 +12,11 @@ export default class extends BaseSchema {
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
       table.timestamp('created_at', { useTz: true }).defaultTo(this.now())
+
+      // index
+      table.index(['id'], 'friend_requests_id_idx')
+      table.index(['sender_id'], 'friend_requests_sender_id_idx')
+      table.index(['receiver_id'], 'friend_requests_receiver_id_idx')
     })
   }
 

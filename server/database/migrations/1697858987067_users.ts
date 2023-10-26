@@ -11,12 +11,18 @@ export default class extends BaseSchema {
       table.string('email').notNullable().unique()
       table.string('password').notNullable()
       table.string('remember_me_token').nullable()
+      table.string('avatar').nullable()
 
       /**
        * Uses timestampz for PostgreSQL and DATETIME2 for MSSQL
        */
       table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now())
       table.timestamp('updated_at', { useTz: true })
+
+      // index
+      table.index(['id'], 'users_id_idx')
+      table.index(['username'], 'users_username_idx')
+      table.index(['email'], 'users_email_idx')
     })
   }
 

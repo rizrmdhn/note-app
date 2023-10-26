@@ -19,6 +19,11 @@ export default class extends BaseSchema {
       table.timestamp('created_at', { useTz: true }).defaultTo(this.now())
       table.timestamp('updated_at', { useTz: true })
       table.timestamp('deleted_at', { useTz: true }).nullable()
+
+      // index
+      table.index(['id'], 'categories_id_idx')
+      table.index(['name'], 'categories_name_idx')
+      table.index(['owner_id'], 'categories_owner_id_idx')
     })
   }
 

@@ -23,6 +23,13 @@ export default class extends BaseSchema {
       table.timestamp('updated_at', { useTz: true })
       table.timestamp('deleted_at', { useTz: true }).nullable()
       table.boolean('is_deleted').defaultTo(false).notNullable()
+
+      // index
+      table.index(['id'], 'notes_id_idx')
+      table.index(['title'], 'notes_title_idx')
+      table.index(['slug'], 'notes_slug_idx')
+      table.index(['owner_id'], 'notes_owner_id_idx')
+      table.index(['folder_id'], 'notes_folder_id_idx')
     })
   }
 
