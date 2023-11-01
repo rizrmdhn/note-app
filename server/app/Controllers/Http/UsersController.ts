@@ -4,6 +4,7 @@ import Database from '@ioc:Adonis/Lucid/Database'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import Hash from '@ioc:Adonis/Core/Hash'
 import Env from '@ioc:Adonis/Core/Env'
+import * as nanoid from 'nanoid'
 
 export default class UsersController {
   public async index({ auth, response }: HttpContextContract) {
@@ -72,7 +73,7 @@ export default class UsersController {
       .insert({ name, email, username, password: encryptedPassword })
       .returning(['id', 'name', 'email', 'username', 'avatar', 'created_at', 'updated_at'])
 
-    const slug = `${user[0].username}-${user[0].id}`
+    const slug = `welcome-to-notes-app-${nanoid.nanoid(10)}`
 
     await Database.table('notes').insert({
       owner_id: user[0].id,

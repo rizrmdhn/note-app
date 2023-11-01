@@ -223,12 +223,68 @@ export default class NotesController {
       .first()
 
     if (!note) {
-      return response.status(404).send({
-        meta: {
-          status: 404,
-          message: 'Note not found',
-        },
-      })
+      const friendNote = await Database.from('notes')
+        .select('notes.*', Database.raw('tags::text[] as tags'))
+        .where('slug', params.slug)
+        .andWhere('is_friend_only', true)
+        .andWhere('is_deleted', false)
+        .first()
+
+      const publicNote = await Database.from('notes')
+        .select('notes.*', Database.raw('tags::text[] as tags'))
+        .where('slug', params.slug)
+        .andWhere('is_public', true)
+        .andWhere('is_deleted', false)
+        .first()
+
+      if (friendNote && !publicNote) {
+        const isFriend = await Database.from('friends')
+          .where('user_id', userId)
+          .andWhere('friend_id', friendNote.owner_id)
+          .orWhere('user_id', friendNote.owner_id)
+          .andWhere('friend_id', userId)
+          .first()
+
+        if (!isFriend) {
+          return {
+            meta: {
+              status: 403,
+              message: 'Forbidden access note is friend only please ask the owner for access',
+            },
+          }
+        }
+
+        friendNote.slug = Env.get('APP_URL') + '/notes/' + friendNote.slug
+
+        return {
+          meta: {
+            status: 200,
+            message: 'Success',
+          },
+          data: friendNote,
+        }
+      }
+
+      if (!friendNote && publicNote) {
+        publicNote.slug = Env.get('APP_URL') + '/notes/' + publicNote.slug
+
+        return {
+          meta: {
+            status: 200,
+            message: 'Success',
+          },
+          data: publicNote,
+        }
+      }
+
+      if (!friendNote && !publicNote) {
+        return response.notFound({
+          meta: {
+            status: 404,
+            message: 'Note not found',
+          },
+        })
+      }
     }
 
     return response.status(200).send({
