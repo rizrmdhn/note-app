@@ -6,7 +6,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaHome, FaUserCircle, FaUserFriends, FaUsers } from "react-icons/fa";
+import {
+  FaHome,
+  FaUserCircle,
+  FaUserFriends,
+  FaUsers,
+  FaDoorOpen,
+} from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
@@ -79,10 +85,25 @@ export default function Header({ needProfile }: HeaderProps) {
             <p className="text-lg font-bold">User</p>
           </div>
           <div className="mr-4 flex flex-row items-center">
-            <Avatar className="h-16 w-16">
-              <AvatarImage />
-              <AvatarFallback>User</AvatarFallback>
-            </Avatar>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar className="h-16 w-16">
+                  <AvatarImage />
+                  <AvatarFallback>User</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="mr-4 bg-primaryColor">
+                <DropdownMenuItem
+                  className="flex flex-row items-center justify-evenly rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black"
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                >
+                  <FaDoorOpen className="mr-2 h-6 w-6" />
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       )}
