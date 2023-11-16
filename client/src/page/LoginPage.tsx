@@ -1,9 +1,12 @@
 import Logo1 from "@/assets/login_1.svg";
 import Logo2 from "@/assets/login_2.png";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   useDocumentTitle("Notes - Login");
+
   return (
     <div className="LoginPage flex h-screen flex-row items-start justify-center">
       <div className="flex h-full w-1/2 flex-col items-center justify-evenly">
@@ -13,9 +16,14 @@ export default function LoginPage() {
         </div>
         <img src={Logo1} alt="Logo" />
       </div>
-      <div className="bg-primaryColor flex h-full w-1/2 flex-col items-center justify-start">
+      <div className="flex h-full w-1/2 flex-col items-center justify-start bg-primaryColor">
         <div className="mb-10 mr-20 mt-20 flex w-full flex-col items-end">
-          <button className="font-poppins rounded-md bg-white p-5 text-lg text-black">
+          <button
+            className="rounded-md bg-white p-5 font-poppins text-lg text-black"
+            onClick={() => {
+              navigate("/register");
+            }}
+          >
             Sign Up
           </button>
         </div>
@@ -24,21 +32,21 @@ export default function LoginPage() {
           <h1 className="font-poppins text-6xl font-bold">Notes</h1>
         </div>
         <form className="flex w-1/2 flex-col">
-          <label className="font-poppins mb-2 text-xl font-bold">Email</label>
+          <label className="mb-2 font-poppins text-xl font-bold">Email</label>
           <input
-            className="font-poppins mb-5 h-16 rounded-sm border border-black p-2"
+            className="mb-5 h-16 rounded-sm border border-black p-2 font-poppins"
             type="email"
             placeholder="Email Address"
           />
-          <label className="font-poppins mb-2 text-xl font-bold">
+          <label className="mb-2 font-poppins text-xl font-bold">
             Password
           </label>
           <input
-            className="font-poppins mb-5 h-16 rounded-sm border border-black p-2"
+            className="mb-5 h-16 rounded-sm border border-black p-2 font-poppins"
             type="password"
             placeholder="Password"
           />
-          <button className="font-poppins mt-5 rounded-md bg-white p-5 text-lg text-black">
+          <button className="mt-5 rounded-md bg-white p-5 font-poppins text-lg text-black">
             Sign In
           </button>
         </form>

@@ -1,9 +1,9 @@
-import { ProfilePage } from "./page";
+import LoggedOutRoutes from "./routes/LoggedOutRoutes";
 
 function App() {
   return (
     <>
-      <ProfilePage />
+      <LoggedOutRoutes />
     </>
   );
 }
