@@ -73,6 +73,7 @@ module.exports = {
       },
       width: {
         "left-menu": "320px",
+        "main-content": "calc(100% - 90px)",
       },
       height: {
         "header-height": "100px",
@@ -85,5 +86,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/line-clamp")],
 };

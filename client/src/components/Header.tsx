@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function Header() {
   return (
-    <div className="bg-primaryColor flex h-header-height flex-row items-center justify-between border-b-2">
+    <div className="bg-primaryColor flex h-header-height flex-row items-center justify-between ">
       <div className="Header_title__menu flex flex-row items-center">
         <button className="ml-4">
           <GiHamburgerMenu className="text-4xl" />
