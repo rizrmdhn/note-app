@@ -13,7 +13,7 @@ import {
   FaUsers,
   FaDoorOpen,
 } from "react-icons/fa";
-import { FaPhone } from "react-icons/fa6";
+import { FaPhone, FaNoteSticky } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 type HeaderProps = {
@@ -38,6 +38,15 @@ export default function Header({ needProfile }: HeaderProps) {
             >
               <FaHome className="mr-2 h-6 w-6" />
               Home
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="mb-3 flex flex-row items-center justify-evenly  rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black"
+              onClick={() => {
+                navigate("/note");
+              }}
+            >
+              <FaNoteSticky className="mr-2 h-6 w-6" />
+              Note
             </DropdownMenuItem>
             <DropdownMenuItem
               className="mb-3 flex flex-row items-center justify-evenly  rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black"

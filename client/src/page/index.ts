@@ -3,6 +3,7 @@ import RegisterPage from "./RegisterPage";
 import HomePage from "./HomePage";
 import AboutUsPage from "./AboutUsPage";
 import ProfilePage from "./ProfilePage";
+import NotePage from "./NotePage";
 import NotFoundPage from "./NotFoundPage";
 
 export {
@@ -11,5 +12,6 @@ export {
   HomePage,
   AboutUsPage,
   ProfilePage,
+  NotePage,
   NotFoundPage,
 };
