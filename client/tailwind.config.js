@@ -17,6 +17,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        primaryColor: "#FFDC81",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -77,6 +78,10 @@ module.exports = {
         "header-height": "100px",
         "half-header-height": "50px",
         "screen-with-header": "calc(100vh - 100px)",
+      },
+      fontFamily: {
+        poppins: "Poppins",
+        inter: "Inter",
       },
     },
   },
