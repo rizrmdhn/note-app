@@ -6,10 +6,10 @@ import useDocumentTitle from "@/hooks/useDocumentTitle";
 export default function HomePage() {
   useDocumentTitle("Notes - Home");
   return (
-    <div className="bg-primaryColor HomePage h-screen">
-      <Header />
+    <div className="HomePage h-screen bg-primaryColor">
+      <Header needProfile />
       <div className="flex flex-row items-center justify-center">
-        <div className="w-main-content mt-20 flex flex-row items-start justify-between rounded-lg bg-white p-5">
+        <div className="mt-20 flex w-main-content flex-row items-start justify-between rounded-lg bg-white p-5">
           <div className="HomeText ml-5 mt-10 flex w-1/2 flex-col justify-start">
             <div className="HomeTextTitle">
               <h1 className="font-poppins text-5xl font-bold">Hallo! User</h1>
