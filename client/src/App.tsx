@@ -1,13 +1,13 @@
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 
-import { LoginPage } from "./page";
+import { RegisterPage } from "./page";
 
 function App() {
   useDocumentTitle("App");
 
   return (
     <>
-      <LoginPage />
+      <RegisterPage />
     </>
   );
 }

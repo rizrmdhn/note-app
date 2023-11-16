@@ -20,7 +20,6 @@ export default function LoginPage() {
         <div className="flex  flex-col items-center justify-center rounded-lg bg-white p-10 pl-20 pr-20">
           <img src={Logo2} alt="Logo" />
           <h1 className="font-poppins text-6xl font-bold">Notes</h1>
-          bd
         </div>
         <form className="flex w-1/2 flex-col">
           <label className="font-poppins mb-2 text-xl">Email</label>
@@ -31,7 +30,7 @@ export default function LoginPage() {
           />
           <label className="font-poppins mb-2 text-xl">Password</label>
           <input
-            className="font-poppins h-16 rounded-sm border border-black p-2"
+            className="font-poppins mb-5 h-16 rounded-sm border border-black p-2"
             type="password"
             placeholder="Password"
           />
