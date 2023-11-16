@@ -22,13 +22,15 @@ export default function LoginPage() {
           <h1 className="font-poppins text-6xl font-bold">Notes</h1>
         </div>
         <form className="flex w-1/2 flex-col">
-          <label className="font-poppins mb-2 text-xl">Email</label>
+          <label className="font-poppins mb-2 text-xl font-bold">Email</label>
           <input
             className="font-poppins mb-5 h-16 rounded-sm border border-black p-2"
             type="email"
             placeholder="Email Address"
           />
-          <label className="font-poppins mb-2 text-xl">Password</label>
+          <label className="font-poppins mb-2 text-xl font-bold">
+            Password
+          </label>
           <input
             className="font-poppins mb-5 h-16 rounded-sm border border-black p-2"
             type="password"

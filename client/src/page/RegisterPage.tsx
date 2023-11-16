@@ -5,25 +5,31 @@ export default function RegisterPage() {
     <div className="Register flex h-screen flex-row items-start justify-center">
       <div className="bg-primaryColor flex h-full w-1/2 flex-col items-center justify-center">
         <form className="flex w-1/2 flex-col">
-          <label className="font-poppins mb-2 text-xl">Username</label>
+          <label className="font-poppins mb-2 text-xl font-bold">
+            Username
+          </label>
           <input
             className="font-poppins mb-5 h-16 rounded-sm border border-black p-2"
             type="text"
             placeholder="Username"
           />
-          <label className="font-poppins mb-2 text-xl">Email</label>
+          <label className="font-poppins mb-2 text-xl font-bold">Email</label>
           <input
             className="font-poppins mb-5 h-16 rounded-sm border border-black p-2"
             type="email"
             placeholder="Email Address"
           />
-          <label className="font-poppins mb-2 text-xl">Password</label>
+          <label className="font-poppins mb-2 text-xl font-bold">
+            Password
+          </label>
           <input
             className="font-poppins mb-5 h-16 rounded-sm border border-black p-2"
             type="password"
             placeholder="Password"
           />
-          <label className="font-poppins mb-2 text-xl">Confirm Password</label>
+          <label className="font-poppins mb-2 text-xl font-bold">
+            Confirm Password
+          </label>
           <input
             className="font-poppins mb-5 h-16 rounded-sm border border-black p-2"
             type="password"
