@@ -8,12 +8,14 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaHome, FaUserCircle, FaUserFriends, FaUsers } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 type HeaderProps = {
   needProfile?: boolean;
 };
 
 export default function Header({ needProfile }: HeaderProps) {
+  const navigate = useNavigate();
   return (
     <div className="flex h-header-height flex-row items-center justify-between bg-primaryColor ">
       <div className="Header_title__menu flex flex-row items-center">
@@ -22,23 +24,48 @@ export default function Header({ needProfile }: HeaderProps) {
             <GiHamburgerMenu className="text-4xl" />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="ml-4 bg-primaryColor">
-            <DropdownMenuItem className="mb-3 flex flex-row items-center justify-evenly rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black">
+            <DropdownMenuItem
+              className="mb-3 flex flex-row items-center justify-evenly rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
               <FaHome className="mr-2 h-6 w-6" />
               Home
             </DropdownMenuItem>
-            <DropdownMenuItem className="mb-3 flex flex-row items-center justify-evenly  rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black">
+            <DropdownMenuItem
+              className="mb-3 flex flex-row items-center justify-evenly  rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black"
+              onClick={() => {
+                navigate("/profile");
+              }}
+            >
               <FaUserCircle className="mr-2 h-6 w-6" />
               Profile
             </DropdownMenuItem>
-            <DropdownMenuItem className="mb-3 flex flex-row items-center justify-evenly  rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black">
+            <DropdownMenuItem
+              className="mb-3 flex flex-row items-center justify-evenly  rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black"
+              onClick={() => {
+                navigate("/friends");
+              }}
+            >
               <FaUserFriends className="mr-2 h-6 w-6" />
               Friends
             </DropdownMenuItem>
-            <DropdownMenuItem className="mb-3 flex flex-row items-center justify-evenly  rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black">
+            <DropdownMenuItem
+              className="mb-3 flex flex-row items-center justify-evenly  rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black"
+              onClick={() => {
+                navigate("/contact-us");
+              }}
+            >
               <FaPhone className="mr-2 h-6 w-6" />
               Contact
             </DropdownMenuItem>
-            <DropdownMenuItem className="mb-3 flex flex-row items-center justify-evenly  rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black">
+            <DropdownMenuItem
+              className="mb-3 flex flex-row items-center justify-evenly  rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black"
+              onClick={() => {
+                navigate("/about-us");
+              }}
+            >
               <FaUsers className="mr-2 h-6 w-6" />
               About Us
             </DropdownMenuItem>

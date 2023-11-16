@@ -1,9 +1,9 @@
-import LoggedOutRoutes from "./routes/LoggedOutRoutes";
+import LoggedInRoutes from "./routes/LoggedInRoutes";
 
 function App() {
   return (
     <>
-      <LoggedOutRoutes />
+      <LoggedInRoutes />
     </>
   );
 }
