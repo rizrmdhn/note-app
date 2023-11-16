@@ -1,6 +1,8 @@
 import Logo1 from "@/assets/register_1.png";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 export default function RegisterPage() {
+  useDocumentTitle("Notes - Register");
   return (
     <div className="Register flex h-screen flex-row items-start justify-center">
       <div className="bg-primaryColor flex h-full w-1/2 flex-col items-center justify-center">

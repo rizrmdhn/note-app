@@ -13,7 +13,6 @@ export default function Header() {
       </div>
       <div className="flex flex-row items-center">
         <div className="mr-5 flex flex-col items-start">
-          <p className="text-lg">Welcome</p>
           <p className="text-lg font-bold">User</p>
         </div>
         <div className="mr-4 flex flex-row items-center">

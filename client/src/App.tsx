@@ -1,13 +1,9 @@
-import useDocumentTitle from "@/hooks/useDocumentTitle";
-
-import { AboutUsPage } from "./page";
+import { ProfilePage } from "./page";
 
 function App() {
-  useDocumentTitle("Notes - About Us");
-
   return (
     <>
-      <AboutUsPage />
+      <ProfilePage />
     </>
   );
 }

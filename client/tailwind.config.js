@@ -18,6 +18,7 @@ export const theme = {
   extend: {
     colors: {
       primaryColor: "#FFDC81",
+      secondaryColor: "#FFF0BA",
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
       ring: "hsl(var(--ring))",
@@ -74,6 +75,7 @@ export const theme = {
     width: {
       "left-menu": "320px",
       "main-content": "calc(100% - 90px)",
+      "profile-card": "500px",
     },
     height: {
       "header-height": "100px",

@@ -1,7 +1,9 @@
 import Logo1 from "@/assets/login_1.svg";
 import Logo2 from "@/assets/login_2.png";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 export default function LoginPage() {
+  useDocumentTitle("Notes - Login");
   return (
     <div className="LoginPage flex h-screen flex-row items-start justify-center">
       <div className="flex h-full w-1/2 flex-col items-center justify-evenly">

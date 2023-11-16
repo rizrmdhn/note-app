@@ -1,8 +1,10 @@
 import Header from "@/components/Header";
 import Logo1 from "@/assets/home_1.png";
 import NoteCard from "@/components/NoteCard";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 export default function HomePage() {
+  useDocumentTitle("Notes - Home");
   return (
     <div className="bg-primaryColor HomePage h-screen">
       <Header />
