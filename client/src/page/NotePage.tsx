@@ -50,8 +50,11 @@ export default function NotePage() {
   ] = useUpdateNote();
 
   const handleGetNotes = (noteId: number) => {
-    if (detailNote !== null && detailNote.id === noteId)
-      return dispatch(asyncEmptyDetailNote() as AnyAction);
+    if (detailNote !== null && detailNote.id === noteId) {
+      dispatch(asyncEmptyDetailNote() as AnyAction);
+      document.title = `Notes - Note`;
+      return;
+    }
     dispatch(asyncGetDetailNote({ noteId }) as AnyAction);
   };
 
@@ -93,6 +96,9 @@ export default function NotePage() {
       setIsFriendOnly(detailNote.is_friend_only);
       setIsPrivate(detailNote.is_private);
       setIsPublic(detailNote.is_public);
+    }
+    if (detailNote !== null) {
+      document.title = `Notes - ${detailNote.title}`;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEditingNote, detailNote]);

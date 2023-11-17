@@ -38,7 +38,7 @@ Route.group(() => {
   Route.get('/users/me', `UsersController.show`)
   Route.put('/users/me', `UsersController.update`)
 
-  Route.post('/avatars', `AvatarsController.store`).middleware(['avatarChecker'])
+  Route.post('/users/me/avatar', `AvatarsController.store`).middleware(['avatarChecker'])
 
   Route.get('/notes/all', `NotesController.index`)
   Route.get('/notes/deleted', `NotesController.indexDeleted`)

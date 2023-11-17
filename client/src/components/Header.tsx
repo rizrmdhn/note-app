@@ -106,7 +106,7 @@ export default function Header({ needProfile }: HeaderProps) {
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Avatar className="h-16 w-16">
-                  <AvatarImage />
+                  <AvatarImage src={authUser?.avatar} alt={authUser?.name} />
                   <AvatarFallback>
                     {authUser?.name?.split(" ").map((name) => name[0])}
                   </AvatarFallback>

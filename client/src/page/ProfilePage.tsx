@@ -1,9 +1,27 @@
 import Header from "@/components/Header";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import ProfileCard from "@/components/ProfileCard";
+import { MouseEvent, useRef } from "react";
+import useUpdateUserAvatar from "@/hooks/useUpdateUserAvatar";
 
 export default function ProfilePage() {
   useDocumentTitle("Notes - Profile");
+
+  const changeAvatarRef = useRef<HTMLInputElement>(null);
+
+  const [handleAvatarChange] = useUpdateUserAvatar();
+
+  const handleChangeAvatar = (
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
+  ) => {
+    e.preventDefault();
+    changeAvatarRef.current?.click();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleAvatarChange(e);
+  };
+
   return (
     <div className="ProfilePage h-screen bg-primaryColor">
       <Header />
@@ -28,10 +46,18 @@ export default function ProfilePage() {
                 Avatar
               </label>
               <input
-                className="mb-5 h-16 w-1/2 rounded-sm border border-black bg-white p-2 font-poppins"
+                ref={changeAvatarRef}
+                onChange={handleFileChange}
+                className="hidden"
                 type="file"
-                placeholder="Avatar"
+                accept="image/*"
               />
+              <button
+                onClick={(e) => handleChangeAvatar(e)}
+                className="mb-5 h-16 w-1/2 rounded-sm border border-black bg-white p-2 font-poppins"
+              >
+                Change Avatar
+              </button>
             </div>
             <div className=" flex flex-col items-start justify-center border-b-2 border-white">
               <label className="mb-2 font-poppins text-xl font-bold">

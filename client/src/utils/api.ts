@@ -372,7 +372,7 @@ const user = (() => {
     const formData = new FormData();
     formData.append("avatar", avatar);
 
-    const response = await axios.put(`${baseUrl}/users/avatar`, formData, {
+    const response = await axios.post(`${baseUrl}/users/me/avatar`, formData, {
       headers: {
         Authorization: `Bearer ${localStorageFunc.getToken()}`,
       },
@@ -380,7 +380,7 @@ const user = (() => {
 
     const { meta } = response.data as TUpdateAvatarResponse;
 
-    if (meta.message !== "Success") {
+    if (meta.message !== "Created" || meta.status !== 201) {
       throw new Error(meta.message);
     }
 

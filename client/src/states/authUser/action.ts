@@ -8,6 +8,7 @@ import { auth, user } from "@/utils/api";
 export enum ActionType {
   SET_AUTH_USER = "SET_AUTH_USER",
   UNSET_AUTH_USER = "UNSET_AUTH_USER",
+  UPDATE_AUTH_USER = "UPDATE_AUTH_USER",
 }
 
 export interface SetAuthUserAction {
@@ -22,9 +23,17 @@ export interface UnsetAuthUserAction {
   payload: null;
 }
 
+export interface UpdateAuthUserAction {
+  type: ActionType.UPDATE_AUTH_USER;
+  payload: {
+    authUser: TUser;
+  };
+}
+
 export type AuthUserAction =
   | SetAuthUserAction
   | UnsetAuthUserAction
+  | UpdateAuthUserAction
   | AnyAction;
 
 function receiveAuthUserActionCreator(authUser: TUser): SetAuthUserAction {
@@ -40,6 +49,15 @@ function unsetAuthUserActionCreator(): UnsetAuthUserAction {
   return {
     type: ActionType.UNSET_AUTH_USER,
     payload: null,
+  };
+}
+
+function updateAuthUserActionCreator(authUser: TUser): UpdateAuthUserAction {
+  return {
+    type: ActionType.UPDATE_AUTH_USER,
+    payload: {
+      authUser,
+    },
   };
 }
 
@@ -87,4 +105,9 @@ function asyncUnsetAuthUser(): unknown {
   };
 }
 
-export { receiveAuthUserActionCreator, asyncSetAuthUser, asyncUnsetAuthUser };
+export {
+  receiveAuthUserActionCreator,
+  updateAuthUserActionCreator,
+  asyncSetAuthUser,
+  asyncUnsetAuthUser,
+};
