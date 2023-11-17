@@ -30,6 +30,33 @@ export default class FoldersController {
     })
   }
 
+  public async indexDeleted({ auth, response }: HttpContextContract) {
+    const userId = auth.use('api').user?.id
+    if (!userId) {
+      response.unauthorized({
+        meta: {
+          status: 401,
+          message: 'Please login first',
+        },
+      })
+      return
+    }
+
+    const folders = await Database.from('folders')
+      .select('folders.*')
+      .where('owner_id', userId)
+      .where('is_deleted', true)
+      .returning('*')
+
+    return response.status(200).send({
+      meta: {
+        status: 200,
+        message: 'Success',
+      },
+      data: folders,
+    })
+  }
+
   public async store({ auth, request, response }: HttpContextContract) {
     const userId = auth.use('api').user?.id
     if (!userId) {

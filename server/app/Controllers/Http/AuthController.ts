@@ -64,13 +64,19 @@ export default class AuthController {
       }
 
       const token = await auth.use('api').attempt(username, password)
+      const user = await auth.use('api').authenticate()
+
+      const data = {
+        token: token,
+        user: user,
+      }
 
       return response.status(200).send({
         meta: {
           status: 200,
           message: 'Success',
         },
-        data: token,
+        data: data,
       })
     }
   }

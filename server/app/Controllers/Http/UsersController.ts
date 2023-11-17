@@ -88,7 +88,7 @@ export default class UsersController {
         status: 200,
         message: 'Success',
       },
-      data: user,
+      data: user[0],
     }
   }
 
@@ -97,9 +97,13 @@ export default class UsersController {
 
     if (userId) {
       const user = await Database.from('users')
-        .select('id', 'name', 'email', 'username', 'created_at', 'updated_at')
+        .select('id', 'name', 'email', 'username', 'avatar', 'created_at', 'updated_at')
         .where('id', userId)
         .first()
+
+      if (user.avatar) {
+        user.avatar = `${Env.get('APP_URL')}/uploads/${user.avatar}`
+      }
 
       return response.status(200).send({
         meta: {

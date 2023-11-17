@@ -36,6 +36,37 @@ export default class NotesController {
     })
   }
 
+  public indexDeleted({ auth, response }: HttpContextContract) {
+    const userId = auth.use('api').user?.id
+    if (!userId) {
+      return response.unauthorized({
+        meta: {
+          status: 401,
+          message: 'Please login first',
+        },
+      })
+    }
+
+    const notes = Database.from('notes')
+      .select('notes.*', Database.raw('tags::text[] as tags'))
+      .where('owner_id', userId)
+      .andWhere('is_deleted', true)
+      .then((notes) => {
+        return notes.map((note) => {
+          note.slug = Env.get('APP_URL') + '/notes/' + note.slug
+          return note
+        })
+      })
+
+    return response.status(200).send({
+      meta: {
+        status: 200,
+        message: 'Success',
+      },
+      data: notes,
+    })
+  }
+
   public async store({ request, auth, response }: HttpContextContract) {
     const { title, content, tags, folderId, isFriendOnly, isPrivate, isPublic } = request.body()
 
@@ -103,6 +134,7 @@ export default class NotesController {
       .then((note) => {
         return note.map((note) => {
           note.tags = note.tags.replace(/"/g, '').replace('{', '').replace('}', '').split(',')
+          note.slug = Env.get('APP_URL') + '/notes/' + note.slug
           return note
         })
       })
@@ -221,6 +253,8 @@ export default class NotesController {
       .andWhere('owner_id', userId)
       .andWhere('is_deleted', false)
       .first()
+
+    note.slug = Env.get('APP_URL') + '/notes/' + note.slug
 
     if (!note) {
       const friendNote = await Database.from('notes')
@@ -386,6 +420,7 @@ export default class NotesController {
       .then((note) => {
         return note.map((note) => {
           note.tags = note.tags.replace(/"/g, '').replace('{', '').replace('}', '').split(',')
+          note.slug = Env.get('APP_URL') + '/notes/' + note.slug
           return note
         })
       })

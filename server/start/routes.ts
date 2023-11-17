@@ -41,6 +41,7 @@ Route.group(() => {
   Route.post('/avatars', `AvatarsController.store`).middleware(['avatarChecker'])
 
   Route.get('/notes/all', `NotesController.index`)
+  Route.get('/notes/deleted', `NotesController.indexDeleted`)
   Route.post('/notes', `NotesController.store`)
   Route.get('/notes', `NotesController.show`)
   Route.get('/notes/:slug', `NotesController.showBySlug`)
@@ -59,6 +60,7 @@ Route.group(() => {
   Route.delete('/bulk-delete/categories', `CategoriesController.bulkDelete`)
 
   Route.get('/folders', `FoldersController.index`)
+  Route.get('/folders/deleted', `FoldersController.indexDeleted`)
   Route.post('/folders', `FoldersController.store`).middleware(['createFolderCategoryChecker'])
   Route.get('/folders/:id', `FoldersController.show`)
   Route.put('/folders/:id', `FoldersController.update`)
