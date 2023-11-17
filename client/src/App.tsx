@@ -1,9 +1,9 @@
-import LoggedInRoutes from "./routes/LoggedInRoutes";
+import Routes from "./routes";
 
 function App() {
   return (
     <>
-      <LoggedInRoutes />
+      <Routes />
     </>
   );
 }

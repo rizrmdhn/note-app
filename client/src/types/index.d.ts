@@ -4,12 +4,16 @@ export type TError = {
   message: string;
 };
 
+export type TErrorData = {
+  message: string;
+};
+
 export type TErrorResponse = {
   meta: {
     status: number;
     message: string;
   };
-  errors: TError[];
+  errors: TError[] | TErrorData | undefined;
 };
 
 export type TMeta = {
@@ -41,7 +45,7 @@ export type TToken = {
 
 export type TLoginResponse = {
   meta: TMeta;
-  data: { token: TToken; user: TUser };
+  data: TToken;
 };
 
 export type TRegisterResponse = {

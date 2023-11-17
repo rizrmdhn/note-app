@@ -2,6 +2,7 @@ import {
   TCreateNote,
   TCreateNoteResponse,
   TDeleteNoteResponse,
+  TGetMeResponse,
   TGetNoteByIdResponse,
   TGetNoteResponse,
   TLoginResponse,
@@ -19,7 +20,7 @@ const localStorageKey = "__notes_app_token__";
 
 const localStorageFunc = (() => {
   function setToken(token: string): void {
-    return localStorage.setItem("accessToken", token);
+    return localStorage.setItem(localStorageKey, token);
   }
 
   function getToken(): string | null {
@@ -38,7 +39,13 @@ const localStorageFunc = (() => {
 })();
 
 const auth = (() => {
-  async function login(email: string, password: string): Promise<TUser> {
+  async function login({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }): Promise<void> {
     const response = await axios.post(`${baseUrl}/login`, {
       email,
       password,
@@ -51,20 +58,23 @@ const auth = (() => {
     }
 
     const {
-      data: { token, user },
+      data: { token },
     } = response.data as TLoginResponse;
 
-    localStorageFunc.setToken(token.token);
-
-    return user;
+    localStorageFunc.setToken(token);
   }
 
-  async function register(
-    name: string,
-    email: string,
-    username: string,
-    password: string,
-  ): Promise<TUser> {
+  async function register({
+    name,
+    email,
+    username,
+    password,
+  }: {
+    name: string;
+    email: string;
+    username: string;
+    password: string;
+  }): Promise<TUser> {
     const response = await axios.post(`${baseUrl}/register`, {
       name,
       email,
@@ -83,9 +93,33 @@ const auth = (() => {
     return data;
   }
 
+  async function logout(): Promise<void> {
+    localStorageFunc.removeToken();
+  }
+
+  async function getMe(): Promise<TUser> {
+    const response = await axios.get(`${baseUrl}/users/me`, {
+      headers: {
+        Authorization: `Bearer ${localStorageFunc.getToken()}`,
+      },
+    });
+
+    const { meta } = response.data as TGetMeResponse;
+
+    if (meta.message !== "Success") {
+      throw new Error(meta.message);
+    }
+
+    const { data } = response.data as TGetMeResponse;
+
+    return data;
+  }
+
   return {
     login,
     register,
+    logout,
+    getMe,
   };
 })();
 

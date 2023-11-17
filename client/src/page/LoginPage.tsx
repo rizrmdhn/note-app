@@ -1,11 +1,15 @@
 import Logo1 from "@/assets/login_1.svg";
 import Logo2 from "@/assets/login_2.png";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
+import useLogin from "@/hooks/useLogin";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-  const navigate = useNavigate();
   useDocumentTitle("Notes - Login");
+  const navigate = useNavigate();
+
+  const [email, onChangeEmail, password, onChangePassword, onSubmitHandler] =
+    useLogin();
 
   return (
     <div className="LoginPage flex h-screen flex-row items-start justify-center">
@@ -31,12 +35,14 @@ export default function LoginPage() {
           <img src={Logo2} alt="Logo" />
           <h1 className="font-poppins text-6xl font-bold">Notes</h1>
         </div>
-        <form className="flex w-1/2 flex-col">
+        <form className="flex w-1/2 flex-col" onSubmit={onSubmitHandler}>
           <label className="mb-2 font-poppins text-xl font-bold">Email</label>
           <input
             className="mb-5 h-16 rounded-sm border border-black p-2 font-poppins"
             type="email"
             placeholder="Email Address"
+            value={email}
+            onChange={onChangeEmail}
           />
           <label className="mb-2 font-poppins text-xl font-bold">
             Password
@@ -45,6 +51,9 @@ export default function LoginPage() {
             className="mb-5 h-16 rounded-sm border border-black p-2 font-poppins"
             type="password"
             placeholder="Password"
+            value={password}
+            onChange={onChangePassword}
+            minLength={8}
           />
           <button className="mt-5 rounded-md bg-white p-5 font-poppins text-lg text-black">
             Sign In
