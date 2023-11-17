@@ -4,7 +4,10 @@ import { hideLoading, showLoading } from "react-redux-loading-bar";
 import { AppDispatch } from "..";
 import { notes } from "@/utils/api";
 import myToast from "@/components/MyToast";
-import { deleteDetailNoteActionCreator } from "../detailNote/action";
+import {
+  deleteDetailNoteActionCreator,
+  updateDetailNoteActionCreator,
+} from "../detailNote/action";
 
 export enum ActionType {
   RECEIVE_NOTES = "RECEIVE_NOTES",
@@ -162,6 +165,7 @@ function asyncUpdateNote({
         isPublic,
       });
       dispatch(updateNoteActionCreator(note));
+      dispatch(updateDetailNoteActionCreator(note));
       myToast.fire({
         icon: "success",
         title: "Update note success",

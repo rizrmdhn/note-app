@@ -8,17 +8,13 @@ import Toolbar from "./Toolbar";
 import OrderedList from "@tiptap/extension-ordered-list";
 import BulletList from "@tiptap/extension-bullet-list";
 import CodeBlock from "@tiptap/extension-code-block";
-import { useDispatch } from "react-redux";
-import { asyncUpdateDetailContent } from "@/states/detailNote/action";
-import { AnyAction } from "@reduxjs/toolkit";
 
 type TiptapProps = {
   text: string;
+  onUpdateText: (event: string) => void;
 };
 
-const Tiptap = ({ text }: TiptapProps) => {
-  const dispatch = useDispatch();
-
+const Tiptap = ({ text, onUpdateText }: TiptapProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -42,9 +38,8 @@ const Tiptap = ({ text }: TiptapProps) => {
       },
     },
     onUpdate: ({ editor }) => {
-      dispatch(
-        asyncUpdateDetailContent({ content: editor.getHTML() }) as AnyAction,
-      );
+      const html = editor.getHTML();
+      onUpdateText(html);
     },
   });
 
