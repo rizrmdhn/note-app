@@ -1,7 +1,6 @@
 import myToast from "@/components/MyToast";
 import { asyncUpdateUserAvatar } from "@/states/users/action";
 import { AnyAction } from "@reduxjs/toolkit";
-
 import { useDispatch } from "react-redux";
 
 type TUseUpdateUserAvatar = [(e: React.ChangeEvent<HTMLInputElement>) => void];

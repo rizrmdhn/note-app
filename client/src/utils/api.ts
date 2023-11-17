@@ -334,20 +334,18 @@ const user = (() => {
   async function updateUser({
     name,
     email,
-    username,
+
     password,
   }: {
     name: string;
     email: string;
-    username: string;
     password: string;
   }): Promise<TUser> {
     const response = await axios.put(
-      `${baseUrl}/users`,
+      `${baseUrl}/users/me`,
       {
         name,
         email,
-        username,
         password,
       },
       {

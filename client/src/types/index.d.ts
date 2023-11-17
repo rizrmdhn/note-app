@@ -13,7 +13,8 @@ export type TErrorResponse = {
     status: number;
     message: string;
   };
-  errors: TError[] | TErrorData | undefined;
+  errors?: TError[];
+  data?: TErrorData;
 };
 
 export type TMeta = {

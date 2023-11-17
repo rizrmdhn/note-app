@@ -3,6 +3,7 @@ import useDocumentTitle from "@/hooks/useDocumentTitle";
 import ProfileCard from "@/components/ProfileCard";
 import { MouseEvent, useRef } from "react";
 import useUpdateUserAvatar from "@/hooks/useUpdateUserAvatar";
+import useUpdateUserData from "@/hooks/useUpdateUserData";
 
 export default function ProfilePage() {
   useDocumentTitle("Notes - Profile");
@@ -10,6 +11,15 @@ export default function ProfilePage() {
   const changeAvatarRef = useRef<HTMLInputElement>(null);
 
   const [handleAvatarChange] = useUpdateUserAvatar();
+  const [
+    nama,
+    onChangeNama,
+    email,
+    onChangeEmail,
+    password,
+    onChangePassword,
+    onSubmitHandler,
+  ] = useUpdateUserData();
 
   const handleChangeAvatar = (
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
@@ -30,7 +40,7 @@ export default function ProfilePage() {
           <ProfileCard />
         </div>
         <div className="FormProfile mt-20 flex w-1/2 flex-col items-center justify-center  rounded-lg p-10 pr-0">
-          <form className="flex w-full flex-col">
+          <form className="flex w-full flex-col" onSubmit={onSubmitHandler}>
             <div className=" flex flex-col items-start justify-center border-b-2 border-white">
               <label className="mb-2 font-poppins text-xl font-bold">
                 Nama
@@ -39,6 +49,8 @@ export default function ProfilePage() {
                 className="mb-5 h-16 w-1/2 rounded-sm border border-black p-2 font-poppins"
                 type="text"
                 placeholder="Nama"
+                value={nama}
+                onChange={onChangeNama}
               />
             </div>
             <div className=" flex flex-col items-start justify-center border-b-2 border-white">
@@ -67,6 +79,8 @@ export default function ProfilePage() {
                 className="mb-5 h-16 w-1/2 rounded-sm border border-black p-2 font-poppins"
                 type="email"
                 placeholder="Email"
+                value={email}
+                onChange={onChangeEmail}
               />
             </div>
             <div className=" flex flex-col items-start justify-center border-b-2 border-white">
@@ -77,6 +91,8 @@ export default function ProfilePage() {
                 className="mb-5 h-16 w-1/2 rounded-sm border border-black p-2 font-poppins"
                 type="password"
                 placeholder="Password"
+                value={password}
+                onChange={onChangePassword}
               />
             </div>
             <button className="mt-5 w-1/2 rounded-md bg-white p-5 font-poppins text-lg text-black">

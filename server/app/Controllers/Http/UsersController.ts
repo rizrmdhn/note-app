@@ -136,10 +136,9 @@ export default class UsersController {
     }
 
     const updateSchema = schema.create({
-      name: schema.string.optional([rules.minLength(3), rules.maxLength(100)]),
-      email: schema.string.optional([rules.email()]),
-
-      password: schema.string.optional([rules.minLength(8)]),
+      name: schema.string([rules.minLength(3), rules.maxLength(100)]),
+      email: schema.string([rules.email()]),
+      password: schema.string([rules.minLength(8)]),
     })
 
     const customMessage = {
@@ -162,22 +161,54 @@ export default class UsersController {
       })
     }
 
+    const userPassword = await Database.from('users').select('password').where('id', userId).first()
+
+    if (!userPassword) {
+      return response.badRequest({
+        meta: {
+          status: 400,
+          message: 'Bad Request',
+        },
+        data: {
+          message: 'User not found',
+        },
+      })
+    }
+
+    const verifyPassword = await Hash.verify(userPassword.password, password)
+
+    if (verifyPassword) {
+      return response.badRequest({
+        meta: {
+          status: 400,
+          message: 'Bad Request',
+        },
+        data: {
+          message: 'New password cannot be the same as old password',
+        },
+      })
+    }
+
     const user = await Database.from('users')
       .where('id', userId)
       .update({
         name: name,
         email: email,
-        password: password,
+        password: await Hash.make(password),
         updated_at: 'now()',
       })
       .returning(['id', 'name', 'email', 'username', 'avatar', 'created_at', 'updated_at'])
+
+    if (user[0].avatar) {
+      user[0].avatar = `${Env.get('APP_URL')}/uploads/${user[0].avatar}`
+    }
 
     return response.status(200).send({
       meta: {
         status: 200,
         message: 'Success',
       },
-      data: user,
+      data: user[0],
     })
   }
 }
