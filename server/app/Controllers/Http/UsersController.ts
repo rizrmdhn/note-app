@@ -124,7 +124,7 @@ export default class UsersController {
 
   public async update({ auth, request, response }: HttpContextContract) {
     const userId = auth.use('api').user?.id
-    const { name, email, username, password } = request.body()
+    const { name, email, password } = request.body()
 
     if (!userId) {
       return response.unauthorized({
@@ -138,11 +138,7 @@ export default class UsersController {
     const updateSchema = schema.create({
       name: schema.string.optional([rules.minLength(3), rules.maxLength(100)]),
       email: schema.string.optional([rules.email()]),
-      username: schema.string.optional([
-        rules.minLength(3),
-        rules.maxLength(50),
-        rules.unique({ table: 'users', column: 'username' }),
-      ]),
+
       password: schema.string.optional([rules.minLength(8)]),
     })
 
@@ -151,9 +147,6 @@ export default class UsersController {
       'name.minLength': 'The name must be at least 3 characters.',
       'name.maxLength': 'The name must be less than 100 characters.',
       'email.email': 'The email must be a valid email address.',
-      'username.minLength': 'The username must be at least 3 characters.',
-      'username.maxLength': 'The username must be less than 50 characters.',
-      'username.unique': 'The username has already been taken.',
       'password.minLength': 'The password must be at least 8 characters.',
     }
 
@@ -174,7 +167,6 @@ export default class UsersController {
       .update({
         name: name,
         email: email,
-        username: username,
         password: password,
         updated_at: 'now()',
       })
