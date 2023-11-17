@@ -1,12 +1,14 @@
 import { AnyAction, ThunkDispatch, configureStore } from "@reduxjs/toolkit";
 import isLoadingReducer from "./isLoading/reducer";
 import authUserReducer from "./authUser/reducer";
+import isPreloadReducer from "./isPreload/reducer";
 import thunk from "redux-thunk";
 
 export const store = configureStore({
   reducer: {
     authUser: authUserReducer,
     isLoading: isLoadingReducer,
+    isPreload: isPreloadReducer,
   },
   middleware: [thunk],
 });

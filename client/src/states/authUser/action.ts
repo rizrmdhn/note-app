@@ -71,11 +71,20 @@ function asyncSetAuthUser({
   };
 }
 
-function asyncUnsetAuthUser() {
+function asyncUnsetAuthUser(): unknown {
   return async (dispatch: AppDispatch) => {
-    dispatch(unsetAuthUserActionCreator());
-    await auth.logout();
+    dispatch(showLoading());
+    try {
+      dispatch(unsetAuthUserActionCreator());
+      await auth.logout();
+    } catch (error) {
+      myToast.fire({
+        icon: "error",
+        title: "Logout failed",
+      });
+    }
+    dispatch(hideLoading());
   };
 }
 
-export { asyncSetAuthUser, asyncUnsetAuthUser };
+export { receiveAuthUserActionCreator, asyncSetAuthUser, asyncUnsetAuthUser };

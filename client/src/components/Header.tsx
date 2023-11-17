@@ -15,13 +15,22 @@ import {
 } from "react-icons/fa";
 import { FaPhone, FaNoteSticky } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import useSelectState from "@/hooks/useSelectState";
+import { TAuthUserState } from "@/states/authUser/reducer";
+import { useDispatch } from "react-redux";
+import { asyncUnsetAuthUser } from "@/states/authUser/action";
+import { AnyAction } from "@reduxjs/toolkit";
 
 type HeaderProps = {
   needProfile?: boolean;
 };
 
 export default function Header({ needProfile }: HeaderProps) {
+  const authUser = useSelectState("authUser") as TAuthUserState;
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <div className="flex h-header-height flex-row items-center justify-between bg-primaryColor ">
       <div className="Header_title__menu flex flex-row items-center">
@@ -91,21 +100,23 @@ export default function Header({ needProfile }: HeaderProps) {
       {needProfile && (
         <div className="flex flex-row items-center">
           <div className="mr-5 flex flex-col items-start">
-            <p className="text-lg font-bold">User</p>
+            <p className="text-lg font-bold">{authUser?.name}</p>
           </div>
           <div className="mr-4 flex flex-row items-center">
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Avatar className="h-16 w-16">
                   <AvatarImage />
-                  <AvatarFallback>User</AvatarFallback>
+                  <AvatarFallback>
+                    {authUser?.name?.split(" ").map((name) => name[0])}
+                  </AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="mr-4 bg-primaryColor">
                 <DropdownMenuItem
                   className="flex flex-row items-center justify-evenly rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black"
                   onClick={() => {
-                    navigate("/");
+                    dispatch(asyncUnsetAuthUser() as AnyAction);
                   }}
                 >
                   <FaDoorOpen className="mr-2 h-6 w-6" />
