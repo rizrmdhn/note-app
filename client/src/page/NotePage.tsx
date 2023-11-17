@@ -102,14 +102,14 @@ export default function NotePage() {
       <Header needProfile />
       <div className="flex flex-row items-center justify-center">
         <div className="mt-20 flex w-main-content flex-row items-start justify-between rounded-lg bg-white p-5">
-          <div className="NoteContainer ml-5 mt-10 flex w-1/2 flex-col justify-start rounded-md bg-secondaryColor p-5">
+          <div className="NoteContainer ml-5 mt-10 flex w-1/2 flex-col justify-start self-stretch rounded-md bg-secondaryColor p-5">
             <div className="NoteAddButton flex w-full flex-row items-center justify-center">
               <Button className="w-1/2 bg-primaryColor p-8 text-lg font-bold text-black">
                 <FaPlus className="mr-2 h-10 w-10 rounded-full bg-white p-2" />
                 Add Note
               </Button>
             </div>
-            <div className="NoteCard mt-5 flex h-[450px] flex-col items-start overflow-y-auto">
+            <div className="NoteCard mt-5 flex flex-col items-start overflow-y-auto">
               {notes?.length > 0 ? (
                 notes.map((note) => (
                   <NoteCard
@@ -220,7 +220,7 @@ export default function NotePage() {
               </div>
             </div>
           ) : (
-            <div className="NoteDetailEmpty ml-5 mt-10 flex w-1/2 flex-col items-center justify-center rounded-md bg-secondaryColor p-5">
+            <div className="NoteDetailEmpty ml-5 mt-10 flex w-1/2 flex-col items-center justify-center self-stretch rounded-md bg-secondaryColor p-5">
               <div className="NoteDetailEmptyText flex flex-col items-center justify-center">
                 <p className="font-poppins text-2xl">
                   Pilih catatan untuk melihat detail
