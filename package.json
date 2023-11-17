@@ -8,7 +8,8 @@
     "client:build": "cd client && npm run build",
     "server:init": "cd server && npm install",
     "server:dev": "cd server && npm run dev",
-    "server:build": "cd server && npm run build"
+    "server:build": "cd server && npm run build",
+    "start:dev": "concurrently \"npm run server:dev\" \"npm run client:dev\""
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/rizrmdhn/note-app/issues"
   },
-  "homepage": "https://github.com/rizrmdhn/note-app#readme"
+  "homepage": "https://github.com/rizrmdhn/note-app#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }

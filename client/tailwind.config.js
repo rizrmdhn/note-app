@@ -89,7 +89,4 @@ export const theme = {
   },
 };
 
-export const plugins = [
-  require("tailwindcss-animate"),
-  require("@tailwindcss/line-clamp"),
-];
+export const plugins = [require("tailwindcss-animate")];
