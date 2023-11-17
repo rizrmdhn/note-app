@@ -296,6 +296,11 @@ export type TGetUserListResponse = {
   data: TUser[];
 };
 
+export type TUpdateUserResponse = {
+  meta: TMeta;
+  data: TUser;
+};
+
 export type TUpdateAvatarResponse = {
   meta: TMeta;
   data: TUser;

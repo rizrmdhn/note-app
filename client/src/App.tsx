@@ -4,6 +4,7 @@ import Routes from "./routes";
 import { useEffect } from "react";
 import { asyncSetIsPreload } from "./states/isPreload/action";
 import { AnyAction } from "@reduxjs/toolkit";
+import { asyncGetNotes } from "./states/notes/action";
 
 function App() {
   const isPreload = useSelectState("isPreload");
@@ -12,6 +13,7 @@ function App() {
 
   useEffect(() => {
     dispatch(asyncSetIsPreload() as AnyAction);
+    dispatch(asyncGetNotes() as AnyAction);
   }, [dispatch]);
 
   if (isPreload) {

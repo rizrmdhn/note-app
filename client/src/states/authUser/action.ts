@@ -3,7 +3,7 @@ import { AnyAction } from "redux";
 import myToast from "@/components/MyToast";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import { AppDispatch } from "..";
-import { auth } from "@/utils/api";
+import { auth, user } from "@/utils/api";
 
 export enum ActionType {
   SET_AUTH_USER = "SET_AUTH_USER",
@@ -54,7 +54,7 @@ function asyncSetAuthUser({
     dispatch(showLoading());
     try {
       await auth.login({ email, password });
-      const authUser = await auth.getMe();
+      const authUser = await user.getMe();
 
       dispatch(receiveAuthUserActionCreator(authUser));
       myToast.fire({

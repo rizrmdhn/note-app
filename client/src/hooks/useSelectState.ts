@@ -4,6 +4,9 @@ import { RootState } from "@/states";
 import { TAuthUserState } from "@/states/authUser/reducer";
 import { TIsLoadingState } from "@/states/isLoading/reducer";
 import { TIsPreloadState } from "@/states/isPreload/reducer";
+import { TNotesState } from "@/states/notes/reducer";
+import { TDetailNoteState } from "@/states/detailNote/reducer";
+import { TIsEditingNoteState } from "@/states/isEditingNote/reducer";
 
 function useSelectState(state: string) {
   const authUser = useSelector<RootState, TAuthUserState>(
@@ -15,6 +18,13 @@ function useSelectState(state: string) {
   const isPreload = useSelector<RootState, TIsPreloadState>(
     (state) => state.isPreload,
   );
+  const notes = useSelector<RootState, TNotesState>((state) => state.notes);
+  const detailNote = useSelector<RootState, TDetailNoteState>(
+    (state) => state.detailNote,
+  );
+  const isEditingNote = useSelector<RootState, TIsEditingNoteState>(
+    (state) => state.isEditingNote,
+  );
 
   switch (state) {
     case "authUser":
@@ -23,6 +33,12 @@ function useSelectState(state: string) {
       return isLoading;
     case "isPreload":
       return isPreload;
+    case "notes":
+      return notes;
+    case "detailNote":
+      return detailNote;
+    case "isEditingNote":
+      return isEditingNote;
     default:
       myToast.fire({
         icon: "error",

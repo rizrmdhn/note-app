@@ -26,7 +26,7 @@ export default function Toolbar({ editor }: ToolbarProps) {
   }
 
   return (
-    <div className="flex max-w-[600px] flex-row items-center justify-evenly bg-primary-foreground">
+    <div className="mb-5 flex max-w-[600px] flex-row items-center justify-evenly gap-1 rounded-md bg-primary-foreground bg-primaryColor p-2">
       <button
         className="rounded p-2 hover:bg-foreground hover:text-primary-foreground"
         onClick={() => editor.chain().focus().undo().run()}

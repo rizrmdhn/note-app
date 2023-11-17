@@ -5,11 +5,14 @@ import {
   TGetMeResponse,
   TGetNoteByIdResponse,
   TGetNoteResponse,
+  TGetUserListResponse,
   TLoginResponse,
   TNote,
   TRegisterResponse,
   TRestoreDeletedNoteResponse,
+  TUpdateAvatarResponse,
   TUpdateNoteResponse,
+  TUpdateUserResponse,
   TUser,
 } from "@/types";
 import axios from "axios";
@@ -97,29 +100,10 @@ const auth = (() => {
     localStorageFunc.removeToken();
   }
 
-  async function getMe(): Promise<TUser> {
-    const response = await axios.get(`${baseUrl}/users/me`, {
-      headers: {
-        Authorization: `Bearer ${localStorageFunc.getToken()}`,
-      },
-    });
-
-    const { meta } = response.data as TGetMeResponse;
-
-    if (meta.message !== "Success") {
-      throw new Error(meta.message);
-    }
-
-    const { data } = response.data as TGetMeResponse;
-
-    return data;
-  }
-
   return {
     login,
     register,
     logout,
-    getMe,
   };
 })();
 
@@ -136,7 +120,7 @@ const notes = (() => {
   }
 
   async function getNotes(): Promise<TNote[]> {
-    const response = await _fetchWithAuth(`${baseUrl}/notes`, {
+    const response = await _fetchWithAuth(`${baseUrl}/notes/all`, {
       method: "GET",
     });
 
@@ -167,11 +151,15 @@ const notes = (() => {
     return data;
   }
 
-  async function createNote(
-    title: string,
-    content: string,
-    tags: string[],
-  ): Promise<TCreateNote> {
+  async function createNote({
+    title,
+    content,
+    tags,
+  }: {
+    title: string;
+    content: string;
+    tags: string[];
+  }): Promise<TCreateNote> {
     const response = await _fetchWithAuth(`${baseUrl}/notes`, {
       method: "POST",
       data: {
@@ -192,15 +180,23 @@ const notes = (() => {
     return data;
   }
 
-  async function updateNote(
-    id: number,
-    title: string,
-    content: string,
-    tags: string[],
-    isPublic: boolean,
-    isPrivate: boolean,
-    isFriendOnly: boolean,
-  ): Promise<TNote> {
+  async function updateNote({
+    id,
+    title,
+    content,
+    tags,
+    isPublic,
+    isPrivate,
+    isFriendOnly,
+  }: {
+    id: number;
+    title: string;
+    content: string;
+    tags: string[];
+    isPublic: boolean;
+    isPrivate: boolean;
+    isFriendOnly: boolean;
+  }): Promise<TNote> {
     const response = await _fetchWithAuth(`${baseUrl}/notes/${id}`, {
       method: "PUT",
       data: {
@@ -298,4 +294,107 @@ const notes = (() => {
   };
 })();
 
-export { auth, notes };
+const user = (() => {
+  async function getMe(): Promise<TUser> {
+    const response = await axios.get(`${baseUrl}/users/me`, {
+      headers: {
+        Authorization: `Bearer ${localStorageFunc.getToken()}`,
+      },
+    });
+
+    const { meta } = response.data as TGetMeResponse;
+
+    if (meta.message !== "Success") {
+      throw new Error(meta.message);
+    }
+
+    const { data } = response.data as TGetMeResponse;
+
+    return data;
+  }
+
+  async function getUserList(): Promise<TUser[]> {
+    const response = await axios.get(`${baseUrl}/users`, {
+      headers: {
+        Authorization: `Bearer ${localStorageFunc.getToken()}`,
+      },
+    });
+
+    const { meta } = response.data as TGetUserListResponse;
+
+    if (meta.message !== "Success") {
+      throw new Error(meta.message);
+    }
+
+    const { data } = response.data as TGetUserListResponse;
+
+    return data;
+  }
+
+  async function updateUser({
+    name,
+    email,
+    username,
+    password,
+  }: {
+    name: string;
+    email: string;
+    username: string;
+    password: string;
+  }): Promise<TUser> {
+    const response = await axios.put(
+      `${baseUrl}/users`,
+      {
+        name,
+        email,
+        username,
+        password,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorageFunc.getToken()}`,
+        },
+      },
+    );
+
+    const { meta } = response.data as TUpdateUserResponse;
+
+    if (meta.message !== "Success") {
+      throw new Error(meta.message);
+    }
+
+    const { data } = response.data as TUpdateUserResponse;
+
+    return data;
+  }
+
+  async function updateAvatar(avatar: File): Promise<TUser> {
+    const formData = new FormData();
+    formData.append("avatar", avatar);
+
+    const response = await axios.put(`${baseUrl}/users/avatar`, formData, {
+      headers: {
+        Authorization: `Bearer ${localStorageFunc.getToken()}`,
+      },
+    });
+
+    const { meta } = response.data as TUpdateAvatarResponse;
+
+    if (meta.message !== "Success") {
+      throw new Error(meta.message);
+    }
+
+    const { data } = response.data as TUpdateAvatarResponse;
+
+    return data;
+  }
+
+  return {
+    getMe,
+    getUserList,
+    updateUser,
+    updateAvatar,
+  };
+})();
+
+export { auth, notes, user };

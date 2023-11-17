@@ -1,6 +1,6 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "..";
-import { auth } from "@/utils/api";
+import { user } from "@/utils/api";
 import { receiveAuthUserActionCreator } from "../authUser/action";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 
@@ -32,7 +32,7 @@ function asyncSetIsPreload(): unknown {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {
-      const authUser = await auth.getMe();
+      const authUser = await user.getMe();
       dispatch(receiveAuthUserActionCreator(authUser));
     } catch (error) {
       dispatch(setIsPreloadActionCreator(null));
