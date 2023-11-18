@@ -1,3 +1,4 @@
+import { cn } from "@/utils/tools";
 import { Editor } from "@tiptap/react";
 import {
   RiBold,
@@ -18,144 +19,192 @@ import {
 
 type ToolbarProps = {
   editor: Editor | null;
+  className?: string;
 };
 
-export default function Toolbar({ editor }: ToolbarProps) {
+export default function Toolbar({ editor, className }: ToolbarProps) {
   if (!editor) {
     return null;
   }
 
   return (
-    <div className="mb-5 flex max-w-[600px] flex-row items-center justify-evenly gap-1 rounded-md bg-primary-foreground bg-primaryColor p-2">
+    <div
+      className={cn(
+        "mb-5 flex max-w-[600px] flex-row items-center justify-evenly gap-1 rounded-md bg-primary-foreground bg-primaryColor p-2",
+        className,
+      )}
+    >
       <button
-        className="rounded p-2 hover:bg-foreground hover:text-primary-foreground"
-        onClick={() => editor.chain().focus().undo().run()}
+        className="rounded p-2 hover:bg-white hover:text-primary-foreground"
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().undo().run();
+        }}
       >
         <RiArrowGoBackLine />
       </button>
       <button
-        className="rounded p-2 hover:bg-foreground hover:text-primary-foreground"
-        onClick={() => editor.chain().focus().redo().run()}
+        className="rounded p-2 hover:bg-white hover:text-primary-foreground"
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().redo().run();
+        }}
       >
         <RiArrowGoForwardLine />
       </button>
       <button
         className={
           editor.isActive("bold")
-            ? "rounded bg-foreground p-2 text-primary-foreground"
-            : "rounded p-2 hover:bg-foreground hover:text-primary-foreground"
+            ? "rounded bg-white p-2 text-primary-foreground"
+            : "rounded p-2 hover:bg-white hover:text-primary-foreground"
         }
-        onClick={() => editor.chain().focus().toggleBold().run()}
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleBold().run();
+        }}
       >
         <RiBold />
       </button>
       <button
         className={
           editor.isActive("italic")
-            ? "rounded bg-foreground p-2 text-primary-foreground"
-            : "rounded p-2 hover:bg-foreground hover:text-primary-foreground"
+            ? "rounded bg-white p-2 text-primary-foreground"
+            : "rounded p-2 hover:bg-white hover:text-primary-foreground"
         }
-        onClick={() => editor.chain().focus().toggleItalic().run()}
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleItalic().run();
+        }}
       >
         <RiItalic />
       </button>
       <button
         className={
           editor.isActive("strike")
-            ? "rounded bg-foreground p-2 text-primary-foreground"
-            : "rounded p-2 hover:bg-foreground hover:text-primary-foreground"
+            ? "rounded bg-white p-2 text-primary-foreground"
+            : "rounded p-2 hover:bg-white hover:text-primary-foreground"
         }
-        onClick={() => editor.chain().focus().toggleStrike().run()}
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleStrike().run();
+        }}
       >
         <RiStrikethrough />
       </button>
       <button
         className={
           editor.isActive("code")
-            ? "rounded bg-foreground p-2 text-primary-foreground"
-            : "rounded p-2 hover:bg-foreground hover:text-primary-foreground"
+            ? "rounded bg-white p-2 text-primary-foreground"
+            : "rounded p-2 hover:bg-white hover:text-primary-foreground"
         }
-        onClick={() => editor.chain().focus().toggleCode().run()}
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleCode().run();
+        }}
       >
         <RiCodeSSlashLine />
       </button>
       <button
         className={
           editor.isActive("heading", { level: 1 })
-            ? "rounded bg-foreground p-2 text-primary-foreground"
-            : "rounded p-2 hover:bg-foreground hover:text-primary-foreground"
+            ? "rounded bg-white p-2 text-primary-foreground"
+            : "rounded p-2 hover:bg-white hover:text-primary-foreground"
         }
-        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleHeading({ level: 1 }).run();
+        }}
       >
         <RiH1 />
       </button>
       <button
         className={
           editor.isActive("heading", { level: 2 })
-            ? "rounded bg-foreground p-2 text-primary-foreground"
-            : "rounded p-2 hover:bg-foreground hover:text-primary-foreground"
+            ? "rounded bg-white p-2 text-primary-foreground"
+            : "rounded p-2 hover:bg-white hover:text-primary-foreground"
         }
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleHeading({ level: 2 }).run();
+        }}
       >
         <RiH2 />
       </button>
       <button
         className={
           editor.isActive("heading", { level: 3 })
-            ? "rounded bg-foreground p-2 text-primary-foreground"
-            : "rounded p-2 hover:bg-foreground hover:text-primary-foreground"
+            ? "rounded bg-white p-2 text-primary-foreground"
+            : "rounded p-2 hover:bg-white hover:text-primary-foreground"
         }
-        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleHeading({ level: 3 }).run();
+        }}
       >
         <RiH3 />
       </button>
       <button
         className={
           editor.isActive("heading", { level: 4 })
-            ? "rounded bg-foreground p-2 text-primary-foreground"
-            : "rounded p-2 hover:bg-foreground hover:text-primary-foreground"
+            ? "rounded bg-white p-2 text-primary-foreground"
+            : "rounded p-2 hover:bg-white hover:text-primary-foreground"
         }
-        onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleHeading({ level: 4 }).run();
+        }}
       >
         <RiH4 />
       </button>
       <button
         className={
           editor.isActive("heading", { level: 5 })
-            ? "rounded bg-foreground p-2 text-primary-foreground"
-            : "rounded p-2 hover:bg-foreground hover:text-primary-foreground"
+            ? "rounded bg-white p-2 text-primary-foreground"
+            : "rounded p-2 hover:bg-white hover:text-primary-foreground"
         }
-        onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleHeading({ level: 5 }).run();
+        }}
       >
         <RiH5 />
       </button>
       <button
         className={
           editor.isActive("heading", { level: 6 })
-            ? "rounded bg-foreground p-2 text-primary-foreground"
-            : "rounded p-2 hover:bg-foreground hover:text-primary-foreground"
+            ? "rounded bg-white p-2 text-primary-foreground"
+            : "rounded p-2 hover:bg-white hover:text-primary-foreground"
         }
-        onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleHeading({ level: 6 }).run();
+        }}
       >
         <RiH6 />
       </button>
       <button
         className={
           editor.isActive("bulletList")
-            ? "rounded bg-foreground p-2 text-primary-foreground"
-            : "rounded p-2 hover:bg-foreground hover:text-primary-foreground"
+            ? "rounded bg-white p-2 text-primary-foreground"
+            : "rounded p-2 hover:bg-white hover:text-primary-foreground"
         }
-        onClick={() => editor.chain().focus().toggleBulletList().run()}
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleBulletList().run();
+        }}
       >
         <RiListUnordered />
       </button>
       <button
         className={
           editor.isActive("orderedList")
-            ? "rounded bg-foreground p-2 text-primary-foreground"
-            : "rounded p-2 hover:bg-foreground hover:text-primary-foreground"
+            ? "rounded bg-white p-2 text-primary-foreground"
+            : "rounded p-2 hover:bg-white hover:text-primary-foreground"
         }
-        onClick={() => editor.chain().focus().toggleOrderedList().run()}
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleOrderedList().run();
+        }}
       >
         <RiListOrdered />
       </button>

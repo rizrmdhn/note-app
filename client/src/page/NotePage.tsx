@@ -10,7 +10,6 @@ import {
 import { TDetailNoteState } from "@/states/detailNote/reducer";
 import { TIsEditingNoteState } from "@/states/isEditingNote/reducer";
 import { TNotesState } from "@/states/notes/reducer";
-import { FaPlus } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import Tiptap from "@/components/TipTap";
@@ -20,6 +19,8 @@ import useUpdateNote from "@/hooks/useUpdateNote";
 import { useSearchParams } from "react-router-dom";
 import { TAuthUserState } from "@/states/authUser/reducer";
 import { useAppDispatch } from "@/hooks/useRedux";
+import AddNoteButton from "@/components/AddNoteButton";
+import useAddNote from "@/hooks/useAddNote";
 
 export default function NotePage() {
   useDocumentTitle("Notes - Note");
@@ -33,6 +34,16 @@ export default function NotePage() {
   const isEditingNote = useSelectState("isEditingNote") as TIsEditingNoteState;
 
   const dispatch = useAppDispatch();
+
+  const [
+    newTitle,
+    newContent,
+    newTags,
+    onChangeNewTitle,
+    onChangeNewContent,
+    onChangeNewTags,
+    onSaveHandler,
+  ] = useAddNote();
 
   const [
     setId,
@@ -57,6 +68,7 @@ export default function NotePage() {
   const handleGetNotes = (noteId: number) => {
     if (detailNote !== null && detailNote.id === noteId) {
       dispatch(asyncEmptyDetailNote());
+      dispatch(setIsEditingNoteActionCreator(false));
       document.title = `Notes - Note`;
       setSearchParam();
       return;
@@ -124,10 +136,15 @@ export default function NotePage() {
         <div className="mt-20 flex w-main-content flex-row items-start justify-between rounded-lg bg-white p-5">
           <div className="NoteContainer ml-5 mt-10 flex w-1/2 flex-col justify-start self-stretch rounded-md bg-secondaryColor p-5">
             <div className="NoteAddButton flex w-full flex-row items-center justify-center">
-              <Button className="w-1/2 bg-primaryColor p-8 text-lg font-bold text-black">
-                <FaPlus className="mr-2 h-10 w-10 rounded-full bg-white p-2" />
-                Add Note
-              </Button>
+              <AddNoteButton
+                title={newTitle}
+                onChangeTitle={onChangeNewTitle}
+                content={newContent}
+                onChangeContent={onChangeNewContent}
+                tags={newTags}
+                onChangeTags={onChangeNewTags}
+                onSaveNote={onSaveHandler}
+              />
             </div>
             <div className="NoteCard mt-5 flex flex-col items-start overflow-y-auto">
               {notes?.length > 0 ? (
@@ -181,6 +198,8 @@ export default function NotePage() {
                   <Tiptap
                     text={content}
                     onUpdateText={(text) => onChangeContent(text)}
+                    className="h-60 overflow-y-auto rounded border-none bg-white font-poppins text-black"
+                    attributPropsClassName="border-none h-60 font-poppins overflow-y-auto"
                   />
                 ) : (
                   <div

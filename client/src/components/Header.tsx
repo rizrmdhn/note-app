@@ -18,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 import useSelectState from "@/hooks/useSelectState";
 import { TAuthUserState } from "@/states/authUser/reducer";
 import { asyncUnsetAuthUser } from "@/states/authUser/action";
-import { AnyAction } from "@reduxjs/toolkit";
 import "moment/locale/id";
 import moment from "moment";
 import LoadingBar from "react-redux-loading-bar";

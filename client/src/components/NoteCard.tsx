@@ -37,7 +37,7 @@ export default function NoteCard({
   if (withContextMenu) {
     return (
       <ContextMenu>
-        <ContextMenuTrigger>
+        <ContextMenuTrigger className="w-full">
           <Card className={cn("mb-5 w-3/5 bg-primaryColor", className)}>
             <CardHeader>
               <CardTitle
