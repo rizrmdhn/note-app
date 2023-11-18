@@ -2,8 +2,7 @@ import React from "react";
 import myToast from "@/components/MyToast";
 import { asyncSetAuthUser } from "@/states/authUser/action";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { AnyAction } from "@reduxjs/toolkit";
+import { useAppDispatch } from "./useRedux";
 
 type FormEventHandlers = [
   string,
@@ -14,7 +13,7 @@ type FormEventHandlers = [
 ];
 
 function useLogin(defaultValue = ""): FormEventHandlers {
-  const disptach = useDispatch();
+  const disptach = useAppDispatch();
 
   const [email, setEmail] = useState(defaultValue);
   const [password, setPassword] = useState(defaultValue);

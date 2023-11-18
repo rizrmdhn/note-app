@@ -1,10 +1,11 @@
-import { user } from "@/utils/api";
+import { auth, user } from "@/utils/api";
 import { AppDispatch } from "..";
 import { updateAuthUserActionCreator } from "../authUser/action";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import myToast from "@/components/MyToast";
 import { AxiosError } from "axios";
 import { TErrorResponse } from "@/types";
+import { NavigateFunction } from "react-router-dom";
 
 function asyncUpdateUserAvatar(foto: File) {
   return async (dispatch: AppDispatch) => {
@@ -72,4 +73,56 @@ function asyncUpdateUser(name: string, email: string, password: string) {
   };
 }
 
-export { asyncUpdateUserAvatar, asyncUpdateUser };
+function asyncUserRegister(
+  name: string,
+  email: string,
+  username: string,
+  password: string,
+  navigate: NavigateFunction,
+) {
+  return async (dispatch: AppDispatch) => {
+    dispatch(showLoading());
+    try {
+      await auth.register({ name, email, username, password });
+
+      myToast.fire({
+        icon: "success",
+        title: "User registered",
+      });
+
+      navigate("/");
+    } catch (error) {
+      const errorAxios = error as AxiosError<TErrorResponse>;
+      const customMessage = errorAxios.response?.data.errors;
+      const customMessageData = errorAxios.response?.data.data;
+
+      if (Array.isArray(customMessage)) {
+        customMessage.map((message) => {
+          myToast.fire({
+            icon: "error",
+            title: message.message,
+          });
+        });
+
+        return;
+      }
+
+      if (customMessageData) {
+        myToast.fire({
+          icon: "error",
+          title: customMessageData.message,
+        });
+
+        return;
+      }
+
+      myToast.fire({
+        icon: "error",
+        title: "Error registering user",
+      });
+    }
+    dispatch(hideLoading());
+  };
+}
+
+export { asyncUpdateUserAvatar, asyncUpdateUser, asyncUserRegister };

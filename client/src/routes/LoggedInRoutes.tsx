@@ -1,3 +1,4 @@
+import { useAppDispatch } from "@/hooks/useRedux";
 import {
   AboutUsPage,
   ContactUsPage,
@@ -10,9 +11,21 @@ import {
   FriendRequestPage,
   FriendRequestSentPage,
 } from "@/page";
+import { asyncGetNotes } from "@/states/notes/action";
+import { asyncGetFriends } from "@/states/shared/action";
+import { asyncGetUserList } from "@/states/userList/action";
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 export default function LoggedInRoutes() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(asyncGetNotes());
+    dispatch(asyncGetUserList());
+    dispatch(asyncGetFriends());
+  }, [dispatch]);
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />

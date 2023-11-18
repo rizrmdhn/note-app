@@ -1,14 +1,40 @@
 import Logo1 from "@/assets/register_1.png";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
+import useRegister from "@/hooks/useRegister";
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
   useDocumentTitle("Notes - Register");
+
+  const [
+    name,
+    onChangeName,
+    email,
+    onChangeEmail,
+    username,
+    onChangeUsername,
+    password,
+    onChangePassword,
+    confirmPassword,
+    onChangeConfirmPassword,
+    onSubmitHandler,
+  ] = useRegister();
+
   return (
     <div className="Register flex h-screen flex-row items-start justify-center">
       <div className="flex h-full w-1/2 flex-col items-center justify-center bg-primaryColor">
-        <form className="flex w-1/2 flex-col">
+        <form className="flex w-1/2 flex-col" onSubmit={onSubmitHandler}>
+          <label className="mb-2 font-poppins text-xl font-bold">
+            Full Name
+          </label>
+          <input
+            className="mb-5 h-16 rounded-sm border border-black p-2 font-poppins"
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={onChangeName}
+          />
           <label className="mb-2 font-poppins text-xl font-bold">
             Username
           </label>
@@ -16,12 +42,16 @@ export default function RegisterPage() {
             className="mb-5 h-16 rounded-sm border border-black p-2 font-poppins"
             type="text"
             placeholder="Username"
+            value={username}
+            onChange={onChangeUsername}
           />
           <label className="mb-2 font-poppins text-xl font-bold">Email</label>
           <input
             className="mb-5 h-16 rounded-sm border border-black p-2 font-poppins"
             type="email"
             placeholder="Email Address"
+            value={email}
+            onChange={onChangeEmail}
           />
           <label className="mb-2 font-poppins text-xl font-bold">
             Password
@@ -30,6 +60,8 @@ export default function RegisterPage() {
             className="mb-5 h-16 rounded-sm border border-black p-2 font-poppins"
             type="password"
             placeholder="Password"
+            value={password}
+            onChange={onChangePassword}
           />
           <label className="mb-2 font-poppins text-xl font-bold">
             Confirm Password
@@ -38,6 +70,8 @@ export default function RegisterPage() {
             className="mb-5 h-16 rounded-sm border border-black p-2 font-poppins"
             type="password"
             placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={onChangeConfirmPassword}
           />
           <button className="mt-5 rounded-md bg-white p-5 font-poppins text-lg text-black ">
             Sign Up
