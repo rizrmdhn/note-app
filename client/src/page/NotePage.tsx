@@ -21,6 +21,7 @@ import { TAuthUserState } from "@/states/authUser/reducer";
 import { useAppDispatch } from "@/hooks/useRedux";
 import AddNoteButton from "@/components/AddNoteButton";
 import useAddNote from "@/hooks/useAddNote";
+import { asyncDeleteNote } from "@/states/notes/action";
 
 export default function NotePage() {
   useDocumentTitle("Notes - Note");
@@ -78,7 +79,7 @@ export default function NotePage() {
   };
 
   const handleDeleteNote = (noteId: number) => {
-    console.log(noteId, "delete");
+    dispatch(asyncDeleteNote({ id: noteId }));
   };
 
   const handleEditNote: React.MouseEventHandler<HTMLButtonElement> = (
@@ -134,7 +135,7 @@ export default function NotePage() {
       <Header needProfile />
       <div className="flex flex-row items-center justify-center">
         <div className="mt-20 flex w-main-content flex-row items-start justify-between rounded-lg bg-white p-5">
-          <div className="NoteContainer ml-5 mt-10 flex w-1/2 flex-col justify-start self-stretch rounded-md bg-secondaryColor p-5">
+          <div className="NoteContainer ml-5 mt-10 flex w-1/2 flex-col justify-start self-stretch overflow-y-auto rounded-md bg-secondaryColor p-5">
             <div className="NoteAddButton flex w-full flex-row items-center justify-center">
               <AddNoteButton
                 title={newTitle}
@@ -146,7 +147,7 @@ export default function NotePage() {
                 onSaveNote={onSaveHandler}
               />
             </div>
-            <div className="NoteCard mt-5 flex flex-col items-start overflow-y-auto">
+            <div className="NoteCard mt-5 flex max-h-[500px] flex-col items-start overflow-y-auto">
               {notes?.length > 0 ? (
                 notes.map((note) => (
                   <NoteCard
