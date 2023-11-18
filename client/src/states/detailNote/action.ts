@@ -1,9 +1,10 @@
-import { TNote } from "@/types";
+import { TErrorResponse, TNote } from "@/types";
 import { notes } from "@/utils/api";
 import { AnyAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "..";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import myToast from "@/components/MyToast";
+import { AxiosError } from "axios";
 
 export enum ActionType {
   RECEIVE_DETAIL_NOTE = "RECEIVE_DETAIL_NOTE",
@@ -105,7 +106,19 @@ function asyncGetDetailNote({ noteId }: { noteId: number }): unknown {
     try {
       const detailNote = await notes.getNoteById(noteId);
       dispatch(receiveDetailNoteActionCreator(detailNote));
-    } catch (error: unknown) {
+    } catch (error) {
+      const axiosError = error as AxiosError<TErrorResponse>;
+      const customMessage = axiosError.message;
+
+      if (customMessage) {
+        myToast.fire({
+          icon: "error",
+          title: customMessage,
+        });
+
+        return;
+      }
+
       myToast.fire({
         icon: "error",
         title: "Get detail note failed",

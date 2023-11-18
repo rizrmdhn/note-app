@@ -19,10 +19,16 @@ import Tiptap from "@/components/TipTap";
 import { setIsEditingNoteActionCreator } from "@/states/isEditingNote/action";
 import { useEffect } from "react";
 import useUpdateNote from "@/hooks/useUpdateNote";
+import { useSearchParams } from "react-router-dom";
+import { TAuthUserState } from "@/states/authUser/reducer";
 
 export default function NotePage() {
   useDocumentTitle("Notes - Note");
 
+  const [searchParam, setSearchParam] = useSearchParams();
+  const noteId = searchParam.get("noteId");
+
+  const authUser = useSelectState("authUser") as TAuthUserState;
   const notes = useSelectState("notes") as TNotesState;
   const detailNote = useSelectState("detailNote") as TDetailNoteState;
   const isEditingNote = useSelectState("isEditingNote") as TIsEditingNoteState;
@@ -53,9 +59,11 @@ export default function NotePage() {
     if (detailNote !== null && detailNote.id === noteId) {
       dispatch(asyncEmptyDetailNote() as AnyAction);
       document.title = `Notes - Note`;
+      setSearchParam();
       return;
     }
     dispatch(asyncGetDetailNote({ noteId }) as AnyAction);
+    setSearchParam({ noteId: noteId.toString() });
   };
 
   const handleDeleteNote = (noteId: number) => {
@@ -86,6 +94,13 @@ export default function NotePage() {
       dispatch(setIsEditingNoteActionCreator(true) as AnyAction);
     }
   };
+
+  useEffect(() => {
+    if (noteId !== null) {
+      const noteIdNumber = parseInt(noteId);
+      dispatch(asyncGetDetailNote({ noteId: noteIdNumber }) as AnyAction);
+    }
+  }, [noteId, dispatch]);
 
   useEffect(() => {
     if (isEditingNote && detailNote !== null) {
@@ -151,14 +166,16 @@ export default function NotePage() {
                     </h1>
                   )}
                 </div>
-                <div className="NoteDetailTitleButton flex flex-row items-center justify-center">
-                  <Button
-                    className="w-1/2 bg-primaryColor p-8 pb-2 pt-1 text-lg font-bold text-black hover:bg-red-500 hover:text-white"
-                    onClick={(event) => handleEditNote(event)}
-                  >
-                    {isEditingNote ? "Save" : "Edit"}
-                  </Button>
-                </div>
+                {detailNote?.owner_id === authUser?.id && (
+                  <div className="NoteDetailTitleButton flex flex-row items-center justify-center">
+                    <Button
+                      className="w-1/2 bg-primaryColor p-8 pb-2 pt-1 text-lg font-bold text-black hover:bg-red-500 hover:text-white"
+                      onClick={(event) => handleEditNote(event)}
+                    >
+                      {isEditingNote ? "Save" : "Edit"}
+                    </Button>
+                  </div>
+                )}
               </div>
               <div className="NoteDetailContent mt-5 flex h-[450px] flex-col items-start overflow-auto">
                 {isEditingNote ? (
@@ -199,7 +216,11 @@ export default function NotePage() {
                       isEditingNote ? "mr-2" : "mr-2 cursor-not-allowed"
                     }
                     checked={isFriendOnly}
-                    onClick={() => setIsFriendOnly(!isFriendOnly)}
+                    onClick={
+                      isEditingNote
+                        ? () => setIsFriendOnly(!isFriendOnly)
+                        : () => {}
+                    }
                   />
                   <p className="font-poppins text-xl">Friend Only</p>
                 </div>
@@ -209,7 +230,9 @@ export default function NotePage() {
                       isEditingNote ? "mr-2" : "mr-2 cursor-not-allowed"
                     }
                     checked={isPrivate}
-                    onClick={() => setIsPrivate(!isPrivate)}
+                    onClick={
+                      isEditingNote ? () => setIsPrivate(!isPrivate) : () => {}
+                    }
                   />
                   <p className="font-poppins text-xl">Private</p>
                 </div>
@@ -219,7 +242,9 @@ export default function NotePage() {
                       isEditingNote ? "mr-2" : "mr-2 cursor-not-allowed"
                     }
                     checked={isPublic}
-                    onClick={() => setIsPublic(!isPublic)}
+                    onClick={
+                      isEditingNote ? () => setIsPublic(!isPublic) : () => {}
+                    }
                   />
                   <p className="font-poppins text-xl">Public</p>
                 </div>
