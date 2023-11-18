@@ -4,6 +4,8 @@ import HomePage from "./HomePage";
 import AboutUsPage from "./AboutUsPage";
 import ProfilePage from "./ProfilePage";
 import NotePage from "./NotePage";
+import ContactUsPage from "./ContactUsPage";
+import FriendPage from "./FriendPage";
 import NotFoundPage from "./NotFoundPage";
 
 export {
@@ -13,5 +15,7 @@ export {
   AboutUsPage,
   ProfilePage,
   NotePage,
+  ContactUsPage,
+  FriendPage,
   NotFoundPage,
 };

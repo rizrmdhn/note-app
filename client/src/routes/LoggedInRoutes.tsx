@@ -1,5 +1,7 @@
 import {
   AboutUsPage,
+  ContactUsPage,
+  FriendPage,
   HomePage,
   NotFoundPage,
   NotePage,
@@ -14,6 +16,8 @@ export default function LoggedInRoutes() {
       <Route path="/note" element={<NotePage />} />
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/about-us" element={<AboutUsPage />} />
+      <Route path="/contact-us" element={<ContactUsPage />} />
+      <Route path="/friends" element={<FriendPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

@@ -215,7 +215,9 @@ export default function NotePage() {
                     className={
                       isEditingNote ? "mr-2" : "mr-2 cursor-not-allowed"
                     }
-                    checked={isFriendOnly}
+                    checked={
+                      isEditingNote ? isFriendOnly : detailNote.is_friend_only
+                    }
                     onClick={
                       isEditingNote
                         ? () => setIsFriendOnly(!isFriendOnly)
@@ -229,7 +231,7 @@ export default function NotePage() {
                     className={
                       isEditingNote ? "mr-2" : "mr-2 cursor-not-allowed"
                     }
-                    checked={isPrivate}
+                    checked={isEditingNote ? isPrivate : detailNote.is_private}
                     onClick={
                       isEditingNote ? () => setIsPrivate(!isPrivate) : () => {}
                     }
@@ -241,7 +243,7 @@ export default function NotePage() {
                     className={
                       isEditingNote ? "mr-2" : "mr-2 cursor-not-allowed"
                     }
-                    checked={isPublic}
+                    checked={isEditingNote ? isPublic : detailNote.is_public}
                     onClick={
                       isEditingNote ? () => setIsPublic(!isPublic) : () => {}
                     }

@@ -5,9 +5,12 @@ import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useSelectState from "@/hooks/useSelectState";
 import { TAuthUserState } from "@/states/authUser/reducer";
 import { TNotesState } from "@/states/notes/reducer";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   useDocumentTitle("Notes - Home");
+
+  const navigate = useNavigate();
 
   const authUser = useSelectState("authUser") as TAuthUserState;
   const notes = useSelectState("notes") as TNotesState;
@@ -31,8 +34,9 @@ export default function HomePage() {
                     key={note.id}
                     title={note.title}
                     content={note.content}
+                    tags={note.tags}
                     onClickTitle={() => {
-                      console.log(note);
+                      navigate(`/note?noteId=${note.id}`);
                     }}
                   />
                 ))

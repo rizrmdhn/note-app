@@ -94,6 +94,16 @@ export default function NoteCard({
           dangerouslySetInnerHTML={{ __html: content }}
         ></CardDescription>
       </CardContent>
+      <CardFooter className="flex flex-row items-center justify-end">
+        {tags.map((tag) => (
+          <p
+            key={tag}
+            className="mr-2 rounded-md bg-white p-2 font-poppins text-sm font-bold text-black"
+          >
+            {tag}
+          </p>
+        ))}
+      </CardFooter>
     </Card>
   );
 }
