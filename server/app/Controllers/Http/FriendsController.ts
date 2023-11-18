@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Database from '@ioc:Adonis/Lucid/Database'
-
+import Env from '@ioc:Adonis/Core/Env'
 export default class FriendsController {
   public async index({ auth, response }: HttpContextContract) {
     const userId = auth.use('api').user?.id
@@ -22,10 +22,20 @@ export default class FriendsController {
       .select(
         'friend.id as friend_id',
         'friend.username as friend_username',
-        'friend.email as friend_email'
+        'friend.email as friend_email',
+        'friend.avatar as friend_avatar',
+        'friend.name as friend_name'
       )
       .where('user_id', userId)
       .returning('*')
+      .then((friend) => {
+        friend.forEach((friend) => {
+          if (friend.friend_avatar) {
+            friend.friend_avatar = `${Env.get('APP_URL')}/uploads/${friend.friend_avatar}`
+          }
+        })
+        return friend
+      })
 
     if (friend.length === 0) {
       friend = await Database.from('friends')
@@ -34,25 +44,45 @@ export default class FriendsController {
         .select(
           'friend.id as friend_id',
           'friend.username as friend_username',
-          'friend.email as friend_email'
+          'friend.email as friend_email',
+          'friend.avatar as friend_avatar',
+          'friend.name as friend_name'
         )
         .where('friend_id', userId)
         .returning('*')
+        .then((friend) => {
+          friend.forEach((friend) => {
+            if (friend.friend_avatar) {
+              friend.friend_avatar = `${Env.get('APP_URL')}/uploads/${friend.friend_avatar}`
+            }
+          })
+          return friend
+        })
     }
 
     const friendRequest = await Database.from('friend_requests')
       .join('users', 'friend_requests.sender_id', '=', 'users.id')
-      .select('users.id', 'users.username', 'users.email')
+      .select('users.id', 'users.username', 'users.email', 'users.avatar', 'users.name')
       .where('receiver_id', userId)
       .then((friendRequest) => {
+        friendRequest.forEach((friend) => {
+          if (friend.avatar) {
+            friend.avatar = `${Env.get('APP_URL')}/uploads/${friend.avatar}`
+          }
+        })
         return friendRequest
       })
 
     const friendSent = await Database.from('friend_requests')
-      .join('users', 'friend_requests.sender_id', '=', 'users.id')
-      .select('users.id', 'users.username', 'users.email')
+      .join('users', 'friend_requests.receiver_id', '=', 'users.id')
+      .select('users.id', 'users.username', 'users.email', 'users.avatar', 'users.name')
       .where('sender_id', userId)
       .then((friendSent) => {
+        friendSent.forEach((friend) => {
+          if (friend.avatar) {
+            friend.avatar = `${Env.get('APP_URL')}/uploads/${friend.avatar}`
+          }
+        })
         return friendSent
       })
 

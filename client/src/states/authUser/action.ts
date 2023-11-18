@@ -67,7 +67,7 @@ function asyncSetAuthUser({
 }: {
   email: string;
   password: string;
-}): unknown {
+}) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {
@@ -79,7 +79,7 @@ function asyncSetAuthUser({
         icon: "success",
         title: "Login success",
       });
-    } catch (error: unknown) {
+    } catch (error) {
       myToast.fire({
         icon: "error",
         title: "Login failed",
@@ -89,7 +89,7 @@ function asyncSetAuthUser({
   };
 }
 
-function asyncUnsetAuthUser(): unknown {
+function asyncUnsetAuthUser() {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {

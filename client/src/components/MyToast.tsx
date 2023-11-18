@@ -12,7 +12,7 @@ const myToast = MySwal.mixin({
     container: "my-swal font-poppins text-lg",
     timerProgressBar: "bg-main",
   },
-  timer: 5000,
+  timer: 1500,
   timerProgressBar: true,
   background: "#F8F9FC",
   color: "#000000",

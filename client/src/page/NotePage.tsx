@@ -10,9 +10,7 @@ import {
 import { TDetailNoteState } from "@/states/detailNote/reducer";
 import { TIsEditingNoteState } from "@/states/isEditingNote/reducer";
 import { TNotesState } from "@/states/notes/reducer";
-import { AnyAction } from "@reduxjs/toolkit";
 import { FaPlus } from "react-icons/fa";
-import { useDispatch } from "react-redux";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import Tiptap from "@/components/TipTap";
@@ -21,6 +19,7 @@ import { useEffect } from "react";
 import useUpdateNote from "@/hooks/useUpdateNote";
 import { useSearchParams } from "react-router-dom";
 import { TAuthUserState } from "@/states/authUser/reducer";
+import { useAppDispatch } from "@/hooks/useRedux";
 
 export default function NotePage() {
   useDocumentTitle("Notes - Note");
@@ -33,7 +32,7 @@ export default function NotePage() {
   const detailNote = useSelectState("detailNote") as TDetailNoteState;
   const isEditingNote = useSelectState("isEditingNote") as TIsEditingNoteState;
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [
     setId,
@@ -57,12 +56,12 @@ export default function NotePage() {
 
   const handleGetNotes = (noteId: number) => {
     if (detailNote !== null && detailNote.id === noteId) {
-      dispatch(asyncEmptyDetailNote() as AnyAction);
+      dispatch(asyncEmptyDetailNote());
       document.title = `Notes - Note`;
       setSearchParam();
       return;
     }
-    dispatch(asyncGetDetailNote({ noteId }) as AnyAction);
+    dispatch(asyncGetDetailNote({ noteId }));
     setSearchParam({ noteId: noteId.toString() });
   };
 
@@ -85,20 +84,20 @@ export default function NotePage() {
         isPrivate === detailNote.is_private &&
         isPublic === detailNote.is_public
       ) {
-        dispatch(setIsEditingNoteActionCreator(false) as AnyAction);
+        dispatch(setIsEditingNoteActionCreator(false));
         return;
       }
       onSubmitHandler(event);
-      dispatch(setIsEditingNoteActionCreator(false) as AnyAction);
+      dispatch(setIsEditingNoteActionCreator(false));
     } else {
-      dispatch(setIsEditingNoteActionCreator(true) as AnyAction);
+      dispatch(setIsEditingNoteActionCreator(true));
     }
   };
 
   useEffect(() => {
     if (noteId !== null) {
       const noteIdNumber = parseInt(noteId);
-      dispatch(asyncGetDetailNote({ noteId: noteIdNumber }) as AnyAction);
+      dispatch(asyncGetDetailNote({ noteId: noteIdNumber }));
     }
   }, [noteId, dispatch]);
 

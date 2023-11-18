@@ -6,7 +6,7 @@ import myToast from "@/components/MyToast";
 import { AxiosError } from "axios";
 import { TErrorResponse } from "@/types";
 
-function asyncUpdateUserAvatar(foto: File): unknown {
+function asyncUpdateUserAvatar(foto: File) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {
@@ -27,11 +27,7 @@ function asyncUpdateUserAvatar(foto: File): unknown {
   };
 }
 
-function asyncUpdateUser(
-  name: string,
-  email: string,
-  password: string,
-): unknown {
+function asyncUpdateUser(name: string, email: string, password: string) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {

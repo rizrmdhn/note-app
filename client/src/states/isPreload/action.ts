@@ -28,7 +28,7 @@ function setIsPreloadActionCreator(
   };
 }
 
-function asyncSetIsPreload(): unknown {
+function asyncSetIsPreload() {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {

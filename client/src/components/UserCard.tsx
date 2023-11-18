@@ -1,22 +1,32 @@
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { FaTrash, FaUserPlus } from "react-icons/fa";
+import { FaTrash, FaUserPlus, FaUserSlash, FaUserTimes } from "react-icons/fa";
 
 type TUserCardProps = {
   addUser?: boolean;
   deleteFriend?: boolean;
+  rejectFriendRequest?: boolean;
+  cancelFriendRequest?: boolean;
   name: string;
   avatar: string;
   onAddUser?: () => void;
+  onDeleteFriend?: () => void;
+  onRejectFriendRequest?: () => void;
+  onCancelFriendRequest?: () => void;
 };
 
 export default function UserCard({
   addUser,
   deleteFriend,
+  rejectFriendRequest,
+  cancelFriendRequest,
   name,
   avatar,
   onAddUser,
+  onDeleteFriend,
+  onRejectFriendRequest,
+  onCancelFriendRequest,
 }: TUserCardProps) {
   return (
     <Card className="w-72">
@@ -44,9 +54,25 @@ export default function UserCard({
         {deleteFriend && (
           <Button
             className="ml-auto bg-transparent hover:bg-transparent"
-            onClick={onAddUser}
+            onClick={onDeleteFriend}
           >
             <FaTrash className="inline-block h-6 w-6 text-black" />
+          </Button>
+        )}
+        {rejectFriendRequest && (
+          <Button
+            className="ml-auto bg-transparent hover:bg-transparent"
+            onClick={onRejectFriendRequest}
+          >
+            <FaUserSlash className="inline-block h-6 w-6 text-black" />
+          </Button>
+        )}
+        {cancelFriendRequest && (
+          <Button
+            className="ml-auto bg-transparent hover:bg-transparent"
+            onClick={onCancelFriendRequest}
+          >
+            <FaUserTimes className="inline-block h-6 w-6 text-black" />
           </Button>
         )}
       </CardContent>

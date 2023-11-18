@@ -44,7 +44,7 @@ function useLogin(defaultValue = ""): FormEventHandlers {
       return;
     }
 
-    disptach(asyncSetAuthUser({ email, password }) as AnyAction);
+    disptach(asyncSetAuthUser({ email, password }));
   };
 
   return [email, onChangeEmail, password, onChangePassword, onSubmitHandler];

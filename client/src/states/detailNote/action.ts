@@ -100,7 +100,7 @@ function restoreDetailNoteActionCreator(): RestoreDetailNoteAction {
   };
 }
 
-function asyncGetDetailNote({ noteId }: { noteId: number }): unknown {
+function asyncGetDetailNote({ noteId }: { noteId: number }) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {
@@ -129,13 +129,13 @@ function asyncGetDetailNote({ noteId }: { noteId: number }): unknown {
   };
 }
 
-function asyncEmptyDetailNote(): unknown {
+function asyncEmptyDetailNote() {
   return async (dispatch: AppDispatch) => {
     dispatch(deleteDetailNoteActionCreator());
   };
 }
 
-function asyncUpdateDetailContent({ content }: { content: string }): unknown {
+function asyncUpdateDetailContent({ content }: { content: string }) {
   return async (dispatch: AppDispatch) => {
     dispatch(updateDetailNoteContentActionCreator(content));
   };

@@ -1,9 +1,8 @@
 import myToast from "@/components/MyToast";
 import { asyncUpdateUser } from "@/states/users/action";
-import { AnyAction } from "@reduxjs/toolkit";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { z } from "zod";
+import { useAppDispatch } from "./useRedux";
 
 const schema = z.object({
   nama: z.string({ invalid_type_error: "Nama harus berupa string!" }),
@@ -28,7 +27,7 @@ type TUseUpdateUserData = [
 ];
 
 function useUpdateUserData(defaultValue = ""): TUseUpdateUserData {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [nama, setNama] = useState(defaultValue);
   const [email, setEmail] = useState(defaultValue);
@@ -67,7 +66,7 @@ function useUpdateUserData(defaultValue = ""): TUseUpdateUserData {
       return;
     }
 
-    dispatch(asyncUpdateUser(nama, email, password) as AnyAction);
+    dispatch(asyncUpdateUser(nama, email, password));
   };
 
   return [

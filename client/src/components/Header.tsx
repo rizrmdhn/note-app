@@ -17,12 +17,12 @@ import { FaPhone, FaNoteSticky } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import useSelectState from "@/hooks/useSelectState";
 import { TAuthUserState } from "@/states/authUser/reducer";
-import { useDispatch } from "react-redux";
 import { asyncUnsetAuthUser } from "@/states/authUser/action";
 import { AnyAction } from "@reduxjs/toolkit";
 import "moment/locale/id";
 import moment from "moment";
 import LoadingBar from "react-redux-loading-bar";
+import { useAppDispatch } from "@/hooks/useRedux";
 
 type HeaderProps = {
   needProfile?: boolean;
@@ -32,7 +32,7 @@ export default function Header({ needProfile }: HeaderProps) {
   const authUser = useSelectState("authUser") as TAuthUserState;
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -123,7 +123,7 @@ export default function Header({ needProfile }: HeaderProps) {
                   <DropdownMenuItem
                     className="flex flex-row items-center justify-evenly rounded-md bg-white p-5 pb-2 pt-2 font-poppins font-bold text-black"
                     onClick={() => {
-                      dispatch(asyncUnsetAuthUser() as AnyAction);
+                      dispatch(asyncUnsetAuthUser());
                     }}
                   >
                     <FaDoorOpen className="mr-2 h-6 w-6" />

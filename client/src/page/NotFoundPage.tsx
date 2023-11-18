@@ -9,10 +9,10 @@ export default function NotFoundPage() {
       <button
         className=" mt-5 rounded-md bg-white p-4 font-poppins text-lg text-black hover:bg-opacity-80"
         onClick={() => {
-          navigate("/");
+          navigate(-1);
         }}
       >
-        Back to Home
+        Back to Previous Page
       </button>
     </div>
   );

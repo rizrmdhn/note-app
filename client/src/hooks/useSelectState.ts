@@ -8,6 +8,9 @@ import { TNotesState } from "@/states/notes/reducer";
 import { TDetailNoteState } from "@/states/detailNote/reducer";
 import { TIsEditingNoteState } from "@/states/isEditingNote/reducer";
 import { TUserListState } from "@/states/userList/reducer";
+import { TFriendListState } from "@/states/friendsList/reducer";
+import { TFriendRequestState } from "@/states/friendRequest/reducer";
+import { TFriendSentState } from "@/states/friendSentList/reducer";
 
 function useSelectState(state: string) {
   const authUser = useSelector<RootState, TAuthUserState>(
@@ -29,6 +32,15 @@ function useSelectState(state: string) {
   const userList = useSelector<RootState, TUserListState>(
     (state) => state.userList,
   );
+  const friendList = useSelector<RootState, TFriendListState>(
+    (state) => state.friendList,
+  );
+  const friendRequestList = useSelector<RootState, TFriendRequestState>(
+    (state) => state.friendRequestList,
+  );
+  const friendSentList = useSelector<RootState, TFriendSentState>(
+    (state) => state.friendSentList,
+  );
 
   switch (state) {
     case "authUser":
@@ -45,6 +57,12 @@ function useSelectState(state: string) {
       return isEditingNote;
     case "userList":
       return userList;
+    case "friendList":
+      return friendList;
+    case "friendRequestList":
+      return friendRequestList;
+    case "friendSentList":
+      return friendSentList;
     default:
       myToast.fire({
         icon: "error",

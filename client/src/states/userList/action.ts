@@ -29,7 +29,7 @@ function receiverUserListActionCreator(
   };
 }
 
-function asyncGetUserList(): unknown {
+function asyncGetUserList() {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {

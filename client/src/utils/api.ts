@@ -1,7 +1,12 @@
 import {
+  TAcceptFriendRequestResponse,
+  TCancelFriendRequestResponse,
   TCreateNote,
   TCreateNoteResponse,
+  TDeleteFriendResponse,
   TDeleteNoteResponse,
+  TFriendAllList,
+  TGetFriendResponse,
   TGetMeResponse,
   TGetNoteByIdResponse,
   TGetNoteResponse,
@@ -9,7 +14,9 @@ import {
   TLoginResponse,
   TNote,
   TRegisterResponse,
+  TRejectFriendRequestResponse,
   TRestoreDeletedNoteResponse,
+  TSentFriendRequestResponse,
   TUpdateAvatarResponse,
   TUpdateNoteResponse,
   TUpdateUserResponse,
@@ -20,6 +27,17 @@ import axios from "axios";
 const baseUrl = "http://127.0.0.1:3333";
 
 const localStorageKey = "__notes_app_token__";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function _fetchWithAuth(url: string, options: any) {
+  return axios(url, {
+    ...options,
+    headers: {
+      ...options.headers,
+      Authorization: `Bearer ${localStorageFunc.getToken()}`,
+    },
+  });
+}
 
 const localStorageFunc = (() => {
   function setToken(token: string): void {
@@ -108,17 +126,6 @@ const auth = (() => {
 })();
 
 const notes = (() => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async function _fetchWithAuth(url: string, options: any) {
-    return axios(url, {
-      ...options,
-      headers: {
-        ...options.headers,
-        Authorization: `Bearer ${localStorageFunc.getToken()}`,
-      },
-    });
-  }
-
   async function getNotes(): Promise<TNote[]> {
     const response = await _fetchWithAuth(`${baseUrl}/notes/all`, {
       method: "GET",
@@ -395,4 +402,100 @@ const user = (() => {
   };
 })();
 
-export { auth, notes, user };
+const friend = (() => {
+  async function getFriend(): Promise<TFriendAllList> {
+    const response = await _fetchWithAuth(`${baseUrl}/friends`, {
+      method: "GET",
+    });
+
+    const { meta } = response.data as TGetFriendResponse;
+
+    if (meta.message !== "Success") {
+      throw new Error(meta.message);
+    }
+
+    const { data } = response.data as TGetFriendResponse;
+
+    return data;
+  }
+
+  async function sentFriendRequest(receiverId: number): Promise<void> {
+    const response = await _fetchWithAuth(`${baseUrl}/friends/${receiverId}`, {
+      method: "POST",
+    });
+
+    const { meta } = response.data as TSentFriendRequestResponse;
+
+    if (meta.message !== "Success") {
+      throw new Error(meta.message);
+    }
+  }
+
+  async function acceptFriendRequest(senderId: number): Promise<void> {
+    const response = await _fetchWithAuth(
+      `${baseUrl}/friends/${senderId}/accept`,
+      {
+        method: "POST",
+      },
+    );
+
+    const { meta } = response.data as TAcceptFriendRequestResponse;
+
+    if (meta.message !== "Success") {
+      throw new Error(meta.message);
+    }
+  }
+
+  async function rejectFriendRequest(senderId: number): Promise<void> {
+    const response = await _fetchWithAuth(
+      `${baseUrl}/friends/${senderId}/reject`,
+      {
+        method: "POST",
+      },
+    );
+
+    const { meta } = response.data as TRejectFriendRequestResponse;
+
+    if (meta.message !== "Success") {
+      throw new Error(meta.message);
+    }
+  }
+
+  async function cancelFriendRequest(receiverId: number): Promise<void> {
+    const response = await _fetchWithAuth(
+      `${baseUrl}/friends/${receiverId}/cancel`,
+      {
+        method: "POST",
+      },
+    );
+
+    const { meta } = response.data as TCancelFriendRequestResponse;
+
+    if (meta.message !== "Success") {
+      throw new Error(meta.message);
+    }
+  }
+
+  async function deleteFriend(friendId: number): Promise<void> {
+    const response = await _fetchWithAuth(`${baseUrl}/friends/${friendId}`, {
+      method: "DELETE",
+    });
+
+    const { meta } = response.data as TDeleteFriendResponse;
+
+    if (meta.message !== "Success") {
+      throw new Error(meta.message);
+    }
+  }
+
+  return {
+    getFriend,
+    sentFriendRequest,
+    acceptFriendRequest,
+    rejectFriendRequest,
+    cancelFriendRequest,
+    deleteFriend,
+  };
+})();
+
+export { auth, notes, user, friend };

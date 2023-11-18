@@ -6,6 +6,9 @@ import ProfilePage from "./ProfilePage";
 import NotePage from "./NotePage";
 import ContactUsPage from "./ContactUsPage";
 import FriendPage from "./FriendPage";
+import UserListPage from "./UserListPage";
+import FriendRequestPage from "./FriendRequestPage";
+import FriendRequestSentPage from "./FriendRequestSentPage";
 import NotFoundPage from "./NotFoundPage";
 
 export {
@@ -17,5 +20,8 @@ export {
   NotePage,
   ContactUsPage,
   FriendPage,
+  UserListPage,
+  FriendRequestPage,
+  FriendRequestSentPage,
   NotFoundPage,
 };

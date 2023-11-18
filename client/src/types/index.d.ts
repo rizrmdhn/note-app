@@ -227,21 +227,27 @@ export type TFriendList = {
   friend_id: number;
   friend_username: string;
   friend_email: string;
+  friend_avatar: string;
+  friend_name: string;
 };
 
 export type TFriendRequestOrSent = {
   id: number;
   username: string;
   email: string;
+  name: string;
+  avatar: string;
+};
+
+export type TFriendAllList = {
+  friendList: TFriendList[];
+  friendRequestList: TFriendRequestOrSent[];
+  friendSentList: TFriendRequestOrSent[];
 };
 
 export type TGetFriendResponse = {
   meta: TMeta;
-  data: {
-    friendList: TFriendList[];
-    friendRequestList: TFriendRequestOrSent[];
-    friendSentList: TFriendRequestOrSent[];
-  };
+  data: TFriendAllList;
 };
 
 export type TSentFriendRequestResponse = {
@@ -268,7 +274,7 @@ export type TRejectFriendRequestResponse = {
   meta: TMeta;
 };
 
-export type TCancleFriendRequestResponse = {
+export type TCancelFriendRequestResponse = {
   meta: TMeta;
 };
 

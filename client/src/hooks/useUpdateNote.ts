@@ -1,8 +1,7 @@
 import myToast from "@/components/MyToast";
 import { asyncUpdateNote } from "@/states/notes/action";
-import { AnyAction } from "@reduxjs/toolkit";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "./useRedux";
 
 type FormEventHandlers = [
   React.Dispatch<React.SetStateAction<number>>,
@@ -25,7 +24,7 @@ type FormEventHandlers = [
 ];
 
 function useUpdateNote(defaultValue = ""): FormEventHandlers {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [id, setId] = useState(0);
   const [title, setTitle] = useState(defaultValue);
@@ -88,7 +87,7 @@ function useUpdateNote(defaultValue = ""): FormEventHandlers {
         isFriendOnly,
         isPrivate,
         isPublic,
-      }) as AnyAction,
+      }),
     );
   };
 

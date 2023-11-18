@@ -7,7 +7,10 @@ import notesReducer from "./notes/reducer";
 import detailNoteReducer from "./detailNote/reducer";
 import isEditingNoteReducer from "./isEditingNote/reducer";
 import userListReducer from "./userList/reducer";
+import friendListReducer from "./friendsList/reducer";
+import friendRequestReducer from "./friendRequest/reducer";
 import thunk from "redux-thunk";
+import friendSentReducer from "./friendSentList/reducer";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +21,9 @@ export const store = configureStore({
     detailNote: detailNoteReducer,
     isEditingNote: isEditingNoteReducer,
     userList: userListReducer,
+    friendList: friendListReducer,
+    friendRequestList: friendRequestReducer,
+    friendSentList: friendSentReducer,
     loadingBar: loadingBarReducer,
   },
   middleware: [thunk],

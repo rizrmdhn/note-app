@@ -87,13 +87,13 @@ function deleteNoteActionCreator(noteId: number): DeleteNoteAction {
   };
 }
 
-function asyncGetNotes(): unknown {
+function asyncGetNotes() {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {
       const notesData = await notes.getNotes();
       dispatch(receiveNotesActionCreator(notesData));
-    } catch (error: unknown) {
+    } catch (error) {
       myToast.fire({
         icon: "error",
         title: "Get notes failed",
@@ -111,7 +111,7 @@ function asyncCreateNote({
   title: string;
   content: string;
   tags: string[];
-}): unknown {
+}) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {
@@ -125,7 +125,7 @@ function asyncCreateNote({
         icon: "success",
         title: "Create note success",
       });
-    } catch (error: unknown) {
+    } catch (error) {
       myToast.fire({
         icon: "error",
         title: "Create note failed",
@@ -151,7 +151,7 @@ function asyncUpdateNote({
   isFriendOnly: boolean;
   isPrivate: boolean;
   isPublic: boolean;
-}): unknown {
+}) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {
@@ -170,7 +170,7 @@ function asyncUpdateNote({
         icon: "success",
         title: "Update note success",
       });
-    } catch (error: unknown) {
+    } catch (error) {
       myToast.fire({
         icon: "error",
         title: "Update note failed",
@@ -180,7 +180,7 @@ function asyncUpdateNote({
   };
 }
 
-function asyncDeleteNote({ id }: { id: number }): unknown {
+function asyncDeleteNote({ id }: { id: number }) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {
@@ -191,7 +191,7 @@ function asyncDeleteNote({ id }: { id: number }): unknown {
         icon: "success",
         title: "Delete note success",
       });
-    } catch (error: unknown) {
+    } catch (error) {
       myToast.fire({
         icon: "error",
         title: "Delete note failed",

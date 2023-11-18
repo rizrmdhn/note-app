@@ -1,12 +1,11 @@
 import myToast from "@/components/MyToast";
 import { asyncUpdateUserAvatar } from "@/states/users/action";
-import { AnyAction } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "./useRedux";
 
 type TUseUpdateUserAvatar = [(e: React.ChangeEvent<HTMLInputElement>) => void];
 
 function useUpdateUserAvatar(): TUseUpdateUserAvatar {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   function handleAvatarChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -34,7 +33,7 @@ function useUpdateUserAvatar(): TUseUpdateUserAvatar {
       return;
     }
 
-    dispatch(asyncUpdateUserAvatar(file) as AnyAction);
+    dispatch(asyncUpdateUserAvatar(file));
   }
 
   return [handleAvatarChange];
